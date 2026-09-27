@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Galleries — Feroge Portfolio</title>
+  <meta name="description" content="Explore Feroge's photo galleries, asymmetric editorial lookbooks, movie stills from Madharasi and The Dorm, and interactive staggered filmstrip.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans, Playfair Display & Pinyon Script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="gallery-page-body">
+
+  <!-- Header / Navigation -->
+  <header class="site-header" id="header">
+    <div class="nav-container">
+      <nav class="nav-left">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="gallery.html" class="nav-link active">Gallery</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <a href="index.html" class="nav-brand" aria-label="Feroge Home">
+        <div class="nav-brand-icon"></div>
+        FEROGE
+      </a>
+
+      <div class="nav-right">
+        <button class="hamburger-btn" id="menu-toggle-btn" aria-label="Toggle Navigation Menu">
+          <span class="hamburger-box">
+            <span class="hamburger-dash"></span>
+            <span class="hamburger-dash"></span>
+            <span class="hamburger-dash"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Backdrop Overlay -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-drawer">
+    <div class="drawer-header">
+      <a href="index.html" class="drawer-brand">
+        <div class="drawer-brand-icon"></div>
+        <span>FEROGE</span>
+      </a>
+      <button class="drawer-close-btn" id="drawer-close" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="drawer-links">
+      <a href="index.html" class="drawer-link" style="--item-index: 1;">
+        <span class="drawer-link-num">01</span>
+        <span class="drawer-link-text">Home</span>
+        <span class="drawer-link-arrow">&rarr;</span>
+      </a>
+      <a href="about.html" class="drawer-link" style="--item-index: 2;">
+        <span class="drawer-link-num">02</span>
+        <span class="drawer-link-text">About &amp; Profile</span>
+        <span class="drawer-link-arrow">&rarr;</span>
+      </a>
+      <a href="gallery.html" class="drawer-link active" style="--item-index: 3;">
+        <span class="drawer-link-num">03</span>
+        <span class="drawer-link-text">Gallery &amp; Cinema</span>
+        <span class="drawer-link-arrow">&rarr;</span>
+      </a>
+      <a href="contact.html" class="drawer-link" style="--item-index: 4;">
+        <span class="drawer-link-num">04</span>
+        <span class="drawer-link-text">Contact &amp; Socials</span>
+        <span class="drawer-link-arrow">&rarr;</span>
+      </a>
+    </nav>
+
+    <div class="drawer-footer">
+      <div class="drawer-meta-tag">Model &amp; Actor &bull; Chennai / Coimbatore</div>
+      <div class="drawer-socials">
+        <a href="#" class="drawer-social-item">Instagram</a>
+        <a href="#" class="drawer-social-item">IMDb</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Header Banner -->
+  <section class="page-banner-section bg-cream">
+    <div class="container">
+      <div class="page-banner-content reveal-on-scroll">
+        <div class="pill-badge pill-badge-light">
+          <span>GALLERY &bull; ARCHIVES</span>
+        </div>
+        <h1 class="page-banner-title">Some Of Our Photo Galleries</h1>
+        <p class="page-banner-subtext">Curated lookbook archives featuring modelling fashion shoots and stills from feature films <em>Madharasi</em> &amp; <em>The Dorm</em>.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- 2. Asymmetric Interlocking Editorial Gallery Grid (Exact Match to Reference Composition) -->
+  <main class="gallery-editorial-section">
+    <div class="container">
+      
+      <div class="asymmetric-gallery-wrapper">
+        
+        <!-- Kinetic Watermark Banner Top -->
+        <div class="gallery-watermark-strip watermark-left">
+          <span>FEROGE &bull; HAUTE COUTURE &bull; EDITORIAL 2026 &bull; CINEMA PORTFOLIO &bull;&nbsp;</span>
+        </div>
+
+        <!-- CLUSTER 1 (Top Block: Hero Left + 2x2 Right) -->
+        <div class="gallery-cluster reveal-on-scroll">
+          
+          <div class="cluster-hero-box curtain-reveal reveal-on-scroll" data-src="images/feroge_21.webp">
+            <div class="curtain-panel curtain-panel-primary"></div>
+            <div class="curtain-panel curtain-panel-secondary"></div>
+            <img src="images/feroge_21.webp" alt="Feroge White Suit Profile" class="curtain-img" loading="lazy" decoding="async" style="object-position: center 25%;">
+            <div class="photo-caption-overlay">
+              <span class="caption-tag">MODELLING &bull; HIGH FASHION</span>
+              <h3 class="caption-title">Haute White Suit Profile</h3>
+            </div>
+          </div>
+
+          <div class="cluster-subgrid-box">
+            <div class="subgrid-card" data-src="images/feroge_76.webp">
+              <img src="images/feroge_76.webp" alt="Feroge Streetwear Walk" loading="lazy" decoding="async" style="object-position: center 25%;">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">EDITORIAL</span>
+                <h4 class="caption-title">Urban Cobblestone Walk</h4>
+              </div>
+            </div>
+
+            <div class="subgrid-card" data-src="images/feroge_79.webp">
+              <img src="images/feroge_79.webp" alt="Feroge Cinema Still Madharasi" loading="lazy" decoding="async" style="object-position: center 20%;">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">FEATURE FILM</span>
+                <h4 class="caption-title">Madharasi Movie Still</h4>
+              </div>
+            </div>
+
+            <div class="subgrid-card" data-src="images/feroge_18.webp">
+              <img src="images/feroge_18.webp" alt="Feroge Trench Coat" loading="lazy" decoding="async" style="object-position: center 25%;">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">MODELLING</span>
+                <h4 class="caption-title">Trench Coat Silhouette</h4>
+              </div>
+            </div>
+
+            <div class="subgrid-card" data-src="images/feroge_73.webp">
+              <img src="images/feroge_73.webp" alt="Feroge Headshot" loading="lazy" decoding="async" style="object-position: center 25%;">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">ACTOR PORTRAITS</span>
+                <h4 class="caption-title">Studio Spotlight Headshot</h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Kinetic Watermark Banner Middle -->
+        <div class="gallery-watermark-strip watermark-right">
+          <span>FEATURE FILMS &bull; MADHARASI &bull; THE DORM &bull; CINEMA ARCHIVES &bull;&nbsp;</span>
+        </div>
+
+        <!-- CLUSTER 2 (Middle Block: 2x2 Left + Hero Right) -->
+        <div class="gallery-cluster gallery-cluster-reversed reveal-on-scroll" data-delay="150">
+          
+          <div class="cluster-subgrid-box">
+            <div class="subgrid-card" data-src="images/feroge_10.webp">
+              <img src="images/feroge_10.webp" alt="Feroge Red Suit" style="object-position: center 20%;">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">RUNWAY</span>
+                <h4 class="caption-title">Commanding Red Suit</h4>
+              </div>
+            </div>
+
+            <div class="subgrid-card" data-src="images/feroge_12.webp">
+              <img src="images/feroge_12.webp" alt="Feroge Emerald Polo">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">EDITORIAL</span>
+                <h4 class="caption-title">Emerald Knit Polo</h4>
+              </div>
+            </div>
+
+            <div class="subgrid-card" data-src="images/feroge_78.webp">
+              <img src="images/feroge_78.webp" alt="Feroge Cinema Still The Dorm" style="object-position: center 20%;">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">FEATURE FILM</span>
+                <h4 class="caption-title">The Dorm Movie Still</h4>
+              </div>
+            </div>
+
+            <div class="subgrid-card" data-src="images/feroge_2.webp">
+              <img src="images/feroge_2.webp" alt="Feroge Studio Pose">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">PORTRAIT</span>
+                <h4 class="caption-title">Studio Casual Look</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="cluster-hero-box curtain-reveal reveal-on-scroll" data-src="images/feroge_19.webp">
+            <div class="curtain-panel curtain-panel-primary"></div>
+            <div class="curtain-panel curtain-panel-secondary"></div>
+            <img src="images/feroge_19.webp" alt="Feroge Runway Walk" class="curtain-img">
+            <div class="photo-caption-overlay">
+              <span class="caption-tag">RUNWAY &bull; PRESENTATION</span>
+              <h3 class="caption-title">Runway Presentation Walk</h3>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- CLUSTER 3 (Bottom Block: Hero Left + 2x2 Right) -->
+        <div class="gallery-cluster reveal-on-scroll" data-delay="300">
+          
+          <div class="cluster-hero-box curtain-reveal reveal-on-scroll" data-src="images/feroge_34.webp">
+            <div class="curtain-panel curtain-panel-primary"></div>
+            <div class="curtain-panel curtain-panel-secondary"></div>
+            <img src="images/feroge_34.webp" alt="Feroge Spotlight Editorial" class="curtain-img">
+            <div class="photo-caption-overlay">
+              <span class="caption-tag">CINEMA &amp; EDITORIAL</span>
+              <h3 class="caption-title">Haute Couture Spotlight</h3>
+            </div>
+          </div>
+
+          <div class="cluster-subgrid-box">
+            <div class="subgrid-card" data-src="images/feroge_27.webp">
+              <img src="images/feroge_27.webp" alt="Feroge Fashion Shoot">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">MODELLING</span>
+                <h4 class="caption-title">Fashion Week Shoot</h4>
+              </div>
+            </div>
+
+            <div class="subgrid-card" data-src="images/feroge_28.webp">
+              <img src="images/feroge_28.webp" alt="Feroge Studio Pose">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">HIGH FASHION</span>
+                <h4 class="caption-title">High-Fashion Pose</h4>
+              </div>
+            </div>
+
+            <div class="subgrid-card" data-src="images/feroge_35.webp">
+              <img src="images/feroge_35.webp" alt="Feroge Portrait Shoot">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">PORTRAITS</span>
+                <h4 class="caption-title">Studio Editorial Shot</h4>
+              </div>
+            </div>
+
+            <div class="subgrid-card" data-src="images/feroge_63.webp">
+              <img src="images/feroge_63.webp" alt="Feroge Commercial Shoot">
+              <div class="photo-caption-overlay">
+                <span class="caption-tag">CAMPAIGNS</span>
+                <h4 class="caption-title">Commercial Campaign</h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Ultra-Luxury Burgundy Magazine Footer (Inspired by Reference Design) -->
+  <footer class="site-footer-v2" id="footer">
+    <div class="container">
+      <div class="footer-burgundy-card reveal-on-scroll">
+        
+        <!-- Top Section: Direct Contact & Social Links -->
+        <div class="footer-top-spread">
+          <h3 class="footer-serif-subtitle">Connect With Feroge</h3>
+          <div class="footer-social-pill-row">
+            <a href="https://wa.me/918072055864" target="_blank" class="footer-social-pill">
+              <span>WhatsApp: +91 8072055864</span>
+              <span class="pill-icon-arrow">&rarr;</span>
+            </a>
+            <a href="#" target="_blank" class="footer-social-pill">
+              <span>Instagram</span>
+              <span class="pill-icon-arrow">&rarr;</span>
+            </a>
+            <a href="#" target="_blank" class="footer-social-pill">
+              <span>IMDb</span>
+              <span class="pill-icon-arrow">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Middle Section: Minimalist 3-Column Editorial Links -->
+        <div class="footer-mid-spread">
+          <div class="f-col-left">
+            <span class="f-col-label">Direct Contact &amp; Socials</span>
+            <div class="f-links-inline">
+              <a href="tel:+918072055864">+91 8072055864</a>
+              <a href="contact.html">Instagram</a>
+              <a href="contact.html">IMDb</a>
+              <a href="https://wa.me/918072055864" target="_blank">WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="f-col-center">
+            <span class="f-col-label">Credits &amp; Address</span>
+            <p class="f-address-text">T-06, B Block, Royal Sheraton Appt, Nanjundapuram Rd, Coimbatore &bull; Tamil Nadu</p>
+          </div>
+
+          <div class="f-col-right">
+            <span class="f-col-label">Navigation</span>
+            <div class="f-links-inline">
+              <a href="index.html">Home</a>
+              <a href="about.html">About</a>
+              <a href="gallery.html">Gallery</a>
+              <a href="contact.html">Contact</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Giant Display Typography -->
+        <div class="footer-giant-brand-wrap">
+          <h2 class="footer-giant-brand">Feroge</h2>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal Viewer -->
+  <div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <img src="" alt="Full Resolution Model Shot" id="lightbox-img">
+  </div>
+
+  <!-- GSAP & ScrollTrigger Animation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FEROGE — Model &amp; Actor Portfolio</title>
+  <meta name="description" content="Official portfolio for model and actor Feroge. 8 years modelling experience, 5 years in cinema. Starring in Madharasi and The Dorm.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans, Playfair Display & Pinyon Script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. Header / Navigation (Floating Luxury Navbar) -->
+  <header class="site-header" id="header">
+    <div class="nav-container">
+      <nav class="nav-left">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <a href="index.html" class="nav-brand" aria-label="Feroge Home">
+        <div class="nav-brand-icon"></div>
+        FEROGE
+      </a>
+
+      <div class="nav-right">
+        <button class="hamburger-btn" id="menu-toggle-btn" aria-label="Toggle Navigation Menu">
+          <span class="hamburger-box">
+            <span class="hamburger-dash"></span>
+            <span class="hamburger-dash"></span>
+            <span class="hamburger-dash"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Backdrop Overlay -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-drawer">
+    <div class="drawer-header">
+      <a href="index.html" class="drawer-brand">
+        <div class="drawer-brand-icon"></div>
+        <span>FEROGE</span>
+      </a>
+      <button class="drawer-close-btn" id="drawer-close" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="drawer-links">
+      <a href="index.html" class="drawer-link active" style="--item-index: 1;">
+        <span class="drawer-link-num">01</span>
+        <span class="drawer-link-text">Home</span>
+        <span class="drawer-link-arrow">&rarr;</span>
+      </a>
+      <a href="about.html" class="drawer-link" style="--item-index: 2;">
+        <span class="drawer-link-num">02</span>
+        <span class="drawer-link-text">About &amp; Bio</span>
+        <span class="drawer-link-arrow">&rarr;</span>
+      </a>
+      <a href="gallery.html" class="drawer-link" style="--item-index: 3;">
+        <span class="drawer-link-num">03</span>
+        <span class="drawer-link-text">Gallery &amp; Cinema</span>
+        <span class="drawer-link-arrow">&rarr;</span>
+      </a>
+      <a href="contact.html" class="drawer-link" style="--item-index: 4;">
+        <span class="drawer-link-num">04</span>
+        <span class="drawer-link-text">Contact &amp; Socials</span>
+        <span class="drawer-link-arrow">&rarr;</span>
+      </a>
+    </nav>
+
+    <div class="drawer-footer">
+      <div class="drawer-meta-tag">Model &amp; Actor &bull; Chennai / Coimbatore</div>
+      <div class="drawer-socials">
+        <a href="#" class="drawer-social-item">Instagram</a>
+        <a href="#" class="drawer-social-item">IMDb</a>
+        <a href="#" class="drawer-social-item">Cinema Archives</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Hero Section (Full-Screen Visual Showcase with Alternating Zoom Slideshow) -->
+  <section class="hero-section hero-full-page" id="home">
+    <div class="hero-slideshow-container" id="hero-slideshow">
+      <div class="hero-slide active">
+        <img src="images/feroge_21.webp" alt="Feroge Model & Actor Portrait" class="hero-slide-img slide-img-1">
+      </div>
+      <div class="hero-slide">
+        <img src="images/feroge_76.webp" alt="Feroge Streetwear Walking Look" class="hero-slide-img slide-img-2">
+      </div>
+      <div class="hero-slide">
+        <img src="images/feroge_79.webp" alt="Feroge Editorial Presentation" class="hero-slide-img slide-img-3">
+      </div>
+      <div class="hero-slide">
+        <img src="images/feroge_73.webp" alt="Feroge Studio Spotlight Headshot" class="hero-slide-img slide-img-4">
+      </div>
+      <div class="hero-slide">
+        <img src="images/feroge_18.webp" alt="Feroge Outdoor High-Fashion Silhouette" class="hero-slide-img slide-img-5">
+      </div>
+    </div>
+
+    <!-- Minimalist Slide Progress Dots -->
+    <div class="hero-slideshow-dots" id="hero-dots">
+      <span class="slide-dot active" data-index="0" aria-label="Slide 1"></span>
+      <span class="slide-dot" data-index="1" aria-label="Slide 2"></span>
+      <span class="slide-dot" data-index="2" aria-label="Slide 3"></span>
+      <span class="slide-dot" data-index="3" aria-label="Slide 4"></span>
+      <span class="slide-dot" data-index="4" aria-label="Slide 5"></span>
+    </div>
+  </section>
+
+  <!-- 3. Home Highlight: About & Profile Teaser -->
+  <section class="home-teaser-section bg-cream">
+    <div class="container">
+      <div class="home-teaser-grid">
+        <div class="teaser-content reveal-on-scroll">
+          <div class="pill-badge pill-badge-light">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Official Profile</span>
+          </div>
+          <h2 class="teaser-title">Model &amp; Actor &bull; 8 Years Industry Excellence</h2>
+          <p class="teaser-text">
+            Based in Chennai and Coimbatore, Feroge is a professional Model and Actor with 8 years of modelling experience and 5 years in cinema. Holds BBA, MBA, and M.Sc. in Visual Communication. Known for roles in <em>Madharasi</em> and <em>The Dorm</em>.
+          </p>
+          <div class="teaser-stats">
+            <div class="stat-mini">
+              <span class="stat-val">5.5 ft</span>
+              <span class="stat-lbl">Height (67 kg)</span>
+            </div>
+            <div class="stat-mini">
+              <span class="stat-val">8 Yrs</span>
+              <span class="stat-lbl">Modelling Exp</span>
+            </div>
+            <div class="stat-mini">
+              <span class="stat-val">5 Yrs</span>
+              <span class="stat-lbl">Cinema Exp</span>
+            </div>
+          </div>
+          <a href="about.html" class="btn-pill-dark">
+            <span>View Full Profile &amp; Movies</span>
+            <span class="btn-arrow-circle-white">&rarr;</span>
+          </a>
+        </div>
+        <div class="teaser-image-wrap curtain-reveal reveal-on-scroll">
+          <div class="curtain-panel curtain-panel-primary"></div>
+          <div class="curtain-panel curtain-panel-secondary"></div>
+          <img src="images/feroge_12.webp" alt="Feroge Portrait" class="teaser-img curtain-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Home Highlight: Editorial & Cinema Moodboard -->
+  <section class="moodboard-section">
+    <div class="container">
+      <div class="section-header-wrap reveal-on-scroll">
+        <div class="pill-badge pill-badge-light">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="0" ry="0"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>Curated Stills &amp; Shoots</span>
+        </div>
+        <h2 class="section-main-heading">Cinema &amp; Modelling Lookbook</h2>
+        <p class="section-subtext">Featuring stills from feature films <em>Madharasi</em> and <em>The Dorm</em> alongside high-fashion shoots.</p>
+      </div>
+
+      <!-- Moodboard Grid Showcase -->
+      <div class="moodboard-canvas-wrapper reveal-on-scroll reveal-scale">
+        <div class="moodboard-canvas" id="moodboard-canvas">
+          <div class="moodboard-item item-manifesto">
+            <p class="manifesto-text">Versatile screen presence &amp; editorial poise across South Indian cinema &amp; fashion.</p>
+            <div class="manifesto-year">2026</div>
+          </div>
+          <div class="moodboard-item item-hero-photo" data-src="images/feroge_79.webp">
+            <div class="offset-frame-white"></div>
+            <div class="moodboard-label-top">CINEMA &bull; MADHARASI / THE DORM</div>
+            <div class="photo-inner">
+              <img src="images/feroge_79.webp" alt="Feroge Feature Film Still" loading="lazy" style="object-position: center 20%;">
+            </div>
+          </div>
+          <div class="moodboard-item item-wide-photo" data-src="images/feroge_19.webp">
+            <div class="offset-frame-white offset-left"></div>
+            <div class="photo-inner">
+              <img src="images/feroge_19.webp" alt="Feroge Fashion Presentation" loading="lazy">
+            </div>
+          </div>
+          <div class="moodboard-item item-tall-photo" data-src="images/feroge_76.webp">
+            <div class="offset-frame-white offset-right"></div>
+            <div class="photo-inner">
+              <img src="images/feroge_76.webp" alt="Feroge Portrait" loading="lazy" style="object-position: center 25%;">
+            </div>
+          </div>
+          <div class="moodboard-item item-bottom-left" data-src="images/feroge_18.webp">
+            <div class="offset-frame-white offset-bottom"></div>
+            <div class="photo-inner">
+              <img src="images/feroge_18.webp" alt="Feroge Outdoor Shoot" loading="lazy" style="object-position: center 25%;">
+            </div>
+          </div>
+          <div class="moodboard-item item-bottom-center" data-src="images/feroge_78.webp">
+            <div class="photo-inner">
+              <img src="images/feroge_78.webp" alt="Feroge Studio Pose" loading="lazy" style="object-position: center 20%;">
+            </div>
+          </div>
+          <div class="moodboard-item item-tag-block">
+            <span class="vertical-year">2026</span>
+          </div>
+          <div class="moodboard-item item-signature-typography">
+            <div class="script-accent">The Character</div>
+            <div class="serif-bold-heading">FEROGE &bull; ACTOR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="teaser-center-action reveal-on-scroll">
+        <a href="gallery.html" class="btn-pill-dark">
+          <span>Explore Interactive Filmstrip Gallery</span>
+          <span class="btn-arrow-circle-white">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Ultra-Luxury Burgundy Magazine Footer (Inspired by Reference Design) -->
+  <footer class="site-footer-v2" id="footer">
+    <div class="container">
+      <div class="footer-burgundy-card reveal-on-scroll">
+        
+        <!-- Top Section: Direct Contact & Social Links -->
+        <div class="footer-top-spread">
+          <h3 class="footer-serif-subtitle">Connect With Feroge</h3>
+          <div class="footer-social-pill-row">
+            <a href="https://wa.me/918072055864" target="_blank" class="footer-social-pill">
+              <span>WhatsApp: +91 8072055864</span>
+              <span class="pill-icon-arrow">&rarr;</span>
+            </a>
+            <a href="#" target="_blank" class="footer-social-pill">
+              <span>Instagram</span>
+              <span class="pill-icon-arrow">&rarr;</span>
+            </a>
+            <a href="#" target="_blank" class="footer-social-pill">
+              <span>IMDb</span>
+              <span class="pill-icon-arrow">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Middle Section: Minimalist 3-Column Editorial Links -->
+        <div class="footer-mid-spread">
+          <div class="f-col-left">
+            <span class="f-col-label">Direct Contact &amp; Socials</span>
+            <div class="f-links-inline">
+              <a href="tel:+918072055864">+91 8072055864</a>
+              <a href="contact.html">Instagram</a>
+              <a href="contact.html">IMDb</a>
+              <a href="https://wa.me/918072055864" target="_blank">WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="f-col-center">
+            <span class="f-col-label">Credits &amp; Address</span>
+            <p class="f-address-text">T-06, B Block, Royal Sheraton Appt, Nanjundapuram Rd, Coimbatore &bull; Tamil Nadu</p>
+          </div>
+
+          <div class="f-col-right">
+            <span class="f-col-label">Navigation</span>
+            <div class="f-links-inline">
+              <a href="index.html">Home</a>
+              <a href="about.html">About</a>
+              <a href="gallery.html">Gallery</a>
+              <a href="contact.html">Contact</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Giant Display Typography -->
+        <div class="footer-giant-brand-wrap">
+          <h2 class="footer-giant-brand">Feroge</h2>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal Viewer -->
+  <div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <img src="" alt="Full Resolution Model Shot" id="lightbox-img">
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
