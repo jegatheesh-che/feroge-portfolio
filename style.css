@@ -507,18 +507,16 @@ button {
 }
 
 /* Individual Slide Focal Framing */
-.hero-slide-img.slide-img-1 { object-position: center 30%; }
-.hero-slide-img.slide-img-2 { object-position: center 40%; }
-.hero-slide-img.slide-img-3 { object-position: center 22%; }
-.hero-slide-img.slide-img-4 { object-position: center 35%; }
-.hero-slide-img.slide-img-5 { object-position: center 28%; }
+.hero-slide-img.slide-img-1 { object-position: center 20%; }
+.hero-slide-img.slide-img-2 { object-position: center 20%; }
+.hero-slide-img.slide-img-3 { object-position: center 20%; }
+.hero-slide-img.slide-img-4 { object-position: center 20%; }
 
 @media (min-width: 1200px) {
-  .hero-slide-img.slide-img-1 { object-position: center 28%; }
-  .hero-slide-img.slide-img-2 { object-position: center 38%; }
+  .hero-slide-img.slide-img-1 { object-position: center 20%; }
+  .hero-slide-img.slide-img-2 { object-position: center 20%; }
   .hero-slide-img.slide-img-3 { object-position: center 20%; }
-  .hero-slide-img.slide-img-4 { object-position: center 32%; }
-  .hero-slide-img.slide-img-5 { object-position: center 25%; }
+  .hero-slide-img.slide-img-4 { object-position: center 20%; }
 }
 
 .hero-slide:nth-child(odd).active .hero-slide-img {
@@ -2147,12 +2145,15 @@ button {
   position: relative;
   overflow: hidden;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.16);
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .teaser-img {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   display: block;
 }
 
