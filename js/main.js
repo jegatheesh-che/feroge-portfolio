@@ -154,7 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '.cluster-hero-box',
     '.subgrid-card',
     '.magazine-photo-window',
-    '.teaser-image-wrap'
+    '.teaser-image-wrap',
+    '.gallery-card-item'
   ];
 
   const clickableItems = document.querySelectorAll(photoSelectors.join(', '));
@@ -188,6 +189,51 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+
+  // Category Filtering Logic with GSAP Animations
+  const filterBtns = document.querySelectorAll('.filter-pill-btn');
+  const galleryItems = document.querySelectorAll('.gallery-card-item');
+
+  if (filterBtns.length > 0 && galleryItems.length > 0) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active tab style
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selectedCategory = btn.dataset.filter;
+
+        galleryItems.forEach(item => {
+          const itemCategory = item.dataset.category;
+          const isMatch = selectedCategory === 'all' || itemCategory === selectedCategory;
+
+          if (typeof gsap !== 'undefined') {
+            if (isMatch) {
+              item.style.display = 'block';
+              gsap.fromTo(item, 
+                { opacity: 0, scale: 0.92, y: 15 }, 
+                { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'power2.out', clearProps: 'transform' }
+              );
+            } else {
+              gsap.to(item, {
+                opacity: 0,
+                scale: 0.92,
+                y: 15,
+                duration: 0.3,
+                ease: 'power2.in',
+                onComplete: () => {
+                  item.style.display = 'none';
+                }
+              });
+            }
+          } else {
+            item.style.display = isMatch ? 'block' : 'none';
+          }
+        });
+      });
+    });
+  }
+
 
   if (mbExpandBtn) {
     mbExpandBtn.addEventListener('click', (e) => {
@@ -702,6 +748,238 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         );
       }
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // 3D Spatial Coverflow Carousel Engine (GSAP-Driven)
+  // ─────────────────────────────────────────────────────────────
+  const cfStage = document.getElementById('coverflow-stage');
+  const cfCards = Array.from(document.querySelectorAll('.coverflow-card'));
+  const cfPrevBtn = document.getElementById('cf-prev');
+  const cfNextBtn = document.getElementById('cf-next');
+  const cfDotsContainer = document.getElementById('cf-dots');
+
+  if (cfStage && cfCards.length > 0) {
+    let activeIndex = 0;
+    const totalCards = cfCards.length;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Build Dots
+    if (cfDotsContainer) {
+      cfDotsContainer.innerHTML = '';
+      cfCards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = `cf-dot ${i === activeIndex ? 'active' : ''}`;
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.addEventListener('click', () => updateCoverflow(i));
+        cfDotsContainer.appendChild(dot);
+      });
+    }
+
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragCurrentDiff = 0;
+    let liveOffset = 0;
+    let rafId = null;
+    let hasDragThreshold = false;
+    const prevDiffMap = new Map();
+
+    function renderCoverflow(offset = 0, animate = true) {
+      const w = window.innerWidth;
+      const isMobile = w <= 768;
+      const isTiny = w <= 480;
+
+      // Exact spacing matching reference design
+      const stepX = isTiny ? 115 : (isMobile ? 135 : 215);
+      const maxVisible = isMobile ? 1 : 2;
+
+      cfCards.forEach((card, i) => {
+        // Calculate shortest cyclic distance
+        let diff = i - activeIndex;
+        if (diff > totalCards / 2) diff -= totalCards;
+        if (diff < -totalCards / 2) diff += totalCards;
+
+        const absDiff = Math.abs(diff);
+        const isActive = diff === 0;
+
+        card.classList.toggle('is-active', isActive && Math.abs(offset) < 20);
+
+        let targetX = diff * stepX + offset;
+        let targetScale = 1;
+        let targetOpacity = 0;
+        let zIndex = 10 - absDiff;
+        let visibility = 'visible';
+
+        if (isActive) {
+          targetScale = isMobile ? 1.08 : 1.14;
+          targetOpacity = 1;
+          zIndex = 30;
+        } else if (absDiff === 1) {
+          targetScale = isMobile ? 0.88 : 0.92;
+          targetOpacity = isMobile ? 0.6 : 0.88;
+          zIndex = 20;
+        } else if (absDiff === 2 && !isMobile) {
+          targetScale = 0.78;
+          targetOpacity = 0.6;
+          zIndex = 10;
+        } else {
+          targetScale = 0.65;
+          targetOpacity = 0;
+          zIndex = 1;
+          visibility = 'hidden';
+        }
+
+        if (absDiff > maxVisible) {
+          targetOpacity = 0;
+          visibility = 'hidden';
+        }
+
+        const prevDiff = prevDiffMap.has(i) ? prevDiffMap.get(i) : diff;
+        prevDiffMap.set(i, diff);
+
+        // Detect cyclic teleportation wrap (jumping across ends)
+        const hasWrapped = Math.abs(diff - prevDiff) > 2.5;
+
+        if (animate && typeof gsap !== 'undefined' && !prefersReducedMotion) {
+          if (hasWrapped) {
+            // Silently reposition off-screen without sweeping across
+            gsap.set(card, {
+              x: targetX,
+              scale: targetScale,
+              rotateY: 0,
+              opacity: 0,
+              zIndex: zIndex,
+              visibility: visibility
+            });
+            if (targetOpacity > 0) {
+              gsap.to(card, {
+                opacity: targetOpacity,
+                duration: 0.45,
+                ease: 'power2.out',
+                delay: 0.08
+              });
+            }
+          } else {
+            gsap.to(card, {
+              x: targetX,
+              scale: targetScale,
+              rotateY: 0,
+              opacity: targetOpacity,
+              zIndex: zIndex,
+              duration: 0.55,
+              ease: 'power3.out',
+              overwrite: 'auto',
+              onStart: () => {
+                if (targetOpacity > 0) card.style.visibility = 'visible';
+              },
+              onComplete: () => {
+                if (targetOpacity === 0) card.style.visibility = 'hidden';
+              }
+            });
+          }
+        } else {
+          card.style.transform = `translateX(${targetX}px) scale(${targetScale})`;
+          card.style.opacity = targetOpacity;
+          card.style.zIndex = zIndex;
+          card.style.visibility = visibility;
+        }
+      });
+
+      // Update dots
+      if (cfDotsContainer) {
+        const dots = cfDotsContainer.querySelectorAll('.cf-dot');
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === activeIndex);
+        });
+      }
+    }
+
+    function updateCoverflow(newIndex) {
+      activeIndex = (newIndex + totalCards) % totalCards;
+      renderCoverflow(0, true);
+    }
+
+    // RAF Loop for 60fps/120fps live dragging without frame drops
+    function rafDragLoop() {
+      if (!isDragging) return;
+      liveOffset += (dragCurrentDiff * 0.45 - liveOffset) * 0.35;
+      renderCoverflow(liveOffset, false);
+      rafId = requestAnimationFrame(rafDragLoop);
+    }
+
+    // Card click: side card brings to center, center card opens gallery
+    cfCards.forEach((card, i) => {
+      card.addEventListener('click', () => {
+        if (hasDragThreshold) return;
+        if (i === activeIndex) {
+          window.location.href = 'gallery.html';
+        } else {
+          updateCoverflow(i);
+        }
+      });
+    });
+
+    if (cfPrevBtn) cfPrevBtn.addEventListener('click', () => updateCoverflow(activeIndex - 1));
+    if (cfNextBtn) cfNextBtn.addEventListener('click', () => updateCoverflow(activeIndex + 1));
+
+    // Pointer Events (Mouse Drag & Mobile Touch Swipe)
+    cfStage.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.coverflow-nav-btn')) return;
+      isDragging = true;
+      hasDragThreshold = false;
+      dragStartX = e.clientX;
+      dragCurrentDiff = 0;
+      liveOffset = 0;
+      cfStage.style.cursor = 'grabbing';
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(rafDragLoop);
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      dragCurrentDiff = e.clientX - dragStartX;
+      if (Math.abs(dragCurrentDiff) > 8) {
+        hasDragThreshold = true;
+      }
+    });
+
+    window.addEventListener('pointerup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      cancelAnimationFrame(rafId);
+      cfStage.style.cursor = '';
+
+      if (Math.abs(dragCurrentDiff) > 40) {
+        if (dragCurrentDiff < 0) updateCoverflow(activeIndex + 1);
+        else updateCoverflow(activeIndex - 1);
+      } else {
+        updateCoverflow(activeIndex);
+      }
+      setTimeout(() => { hasDragThreshold = false; }, 50);
+      dragCurrentDiff = 0;
+      liveOffset = 0;
+    });
+
+    // Keyboard Arrow navigation when stage is in viewport
+    document.addEventListener('keydown', (e) => {
+      const rect = cfStage.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+      if (e.key === 'ArrowLeft') updateCoverflow(activeIndex - 1);
+      if (e.key === 'ArrowRight') updateCoverflow(activeIndex + 1);
+    });
+
+    // Initial positioning
+    renderCoverflow(0, false);
+
+    // Responsive update on window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        renderCoverflow(0, false);
+      }, 100);
     });
   }
 });

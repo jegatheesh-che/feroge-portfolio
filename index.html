@@ -160,8 +160,8 @@
     </div>
   </section>
 
-  <!-- 4. Home Highlight: Editorial & Cinema Moodboard -->
-  <section class="moodboard-section">
+  <!-- 4. Home Highlight: 3D Spatial Coverflow Carousel (Matching Luxury Reference) -->
+  <section class="spatial-coverflow-section" id="curated-stills">
     <div class="container">
       <div class="section-header-wrap reveal-on-scroll">
         <div class="pill-badge pill-badge-light">
@@ -176,56 +176,99 @@
         <p class="section-subtext">Featuring stills from Madharaasi and The Dorm, alongside high fashion shoots.</p>
       </div>
 
-      <!-- Moodboard Grid Showcase -->
-      <div class="moodboard-canvas-wrapper reveal-on-scroll reveal-scale">
-        <div class="moodboard-canvas" id="moodboard-canvas">
-          <div class="moodboard-item item-manifesto">
-            <p class="manifesto-text">Versatile screen presence &amp; editorial poise across South Indian cinema &amp; fashion.</p>
-            <div class="manifesto-year">2026</div>
-          </div>
-          <div class="moodboard-item item-hero-photo" data-src="images/feroge_79.webp">
-            <div class="offset-frame-white"></div>
-            <div class="moodboard-label-top">CINEMA &bull; MADHARAASI / THE DORM</div>
-            <div class="photo-inner">
-              <img src="images/feroge_79.webp" alt="Feroge Feature Film Still" loading="lazy" style="object-position: center 20%;">
+      <!-- 3D Spatial Coverflow Stage -->
+      <div class="coverflow-stage-wrapper reveal-on-scroll">
+        <div class="coverflow-stage" id="coverflow-stage">
+          <div class="coverflow-track" id="coverflow-track">
+
+            <div class="coverflow-card" data-index="0" data-src="images/feroge_79.webp">
+              <div class="card-inner">
+                <img src="images/feroge_79.webp" alt="Madharaasi Feature Film Still" loading="lazy">
+                <div class="card-overlay">
+                  <span class="card-tag">Cinema &bull; Feature Film</span>
+                  <h4 class="card-title">Madharaasi Stills</h4>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="moodboard-item item-wide-photo" data-src="images/feroge_19.webp">
-            <div class="offset-frame-white offset-left"></div>
-            <div class="photo-inner">
-              <img src="images/feroge_19.webp" alt="Feroge Fashion Presentation" loading="lazy">
+
+            <div class="coverflow-card" data-index="1" data-src="images/feroge_19.webp">
+              <div class="card-inner">
+                <img src="images/feroge_19.webp" alt="Haute Couture Fashion" loading="lazy">
+                <div class="card-overlay">
+                  <span class="card-tag">Editorial &bull; Runway</span>
+                  <h4 class="card-title">Haute Couture Blazer</h4>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="moodboard-item item-tall-photo" data-src="images/feroge_76.webp">
-            <div class="offset-frame-white offset-right"></div>
-            <div class="photo-inner">
-              <img src="images/feroge_76.webp" alt="Feroge Portrait" loading="lazy" style="object-position: center 25%;">
+
+            <div class="coverflow-card" data-index="2" data-src="images/feroge_76.webp">
+              <div class="card-inner">
+                <img src="images/feroge_76.webp" alt="Monochrome Noir Profile" loading="lazy">
+                <div class="card-overlay">
+                  <span class="card-tag">Monochrome &bull; Noir</span>
+                  <h4 class="card-title">Studio Spotlight</h4>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="moodboard-item item-bottom-left" data-src="images/feroge_18.webp">
-            <div class="offset-frame-white offset-bottom"></div>
-            <div class="photo-inner">
-              <img src="images/feroge_18.webp" alt="Feroge Outdoor Shoot" loading="lazy" style="object-position: center 25%;">
+
+            <div class="coverflow-card" data-index="3" data-src="images/feroge_18.webp">
+              <div class="card-inner">
+                <img src="images/feroge_18.webp" alt="Mountain Outdoor Landscape" loading="lazy">
+                <div class="card-overlay">
+                  <span class="card-tag">Outdoor &bull; Editorial</span>
+                  <h4 class="card-title">Alpine Horizon</h4>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="moodboard-item item-bottom-center" data-src="images/feroge_78.webp">
-            <div class="photo-inner">
-              <img src="images/feroge_78.webp" alt="Feroge Studio Pose" loading="lazy" style="object-position: center 20%;">
+
+            <div class="coverflow-card" data-index="4" data-src="images/feroge_78.webp">
+              <div class="card-inner">
+                <img src="images/feroge_78.webp" alt="Gentleman Library Coffee" loading="lazy">
+                <div class="card-overlay">
+                  <span class="card-tag">Classic &bull; Gentleman</span>
+                  <h4 class="card-title">Warm Leather Lounge</h4>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="moodboard-item item-tag-block">
-            <span class="vertical-year">2026</span>
-          </div>
-          <div class="moodboard-item item-signature-typography">
-            <div class="script-accent">The Character</div>
-            <div class="serif-bold-heading">FEROGE &bull; ACTOR</div>
-          </div>
-        </div>
-      </div>
+
+            <div class="coverflow-card" data-index="5" data-src="images/feroge_34.webp">
+              <div class="card-inner">
+                <img src="images/feroge_34.webp" alt="Urban Street Walk" loading="lazy">
+                <div class="card-overlay">
+                  <span class="card-tag">Urban &bull; Streetwear</span>
+                  <h4 class="card-title">Metropolitan Poise</h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="coverflow-card" data-index="6" data-src="images/feroge_21.webp">
+              <div class="card-inner">
+                <img src="images/feroge_21.webp" alt="Royal Traditional Silk" loading="lazy">
+                <div class="card-overlay">
+                  <span class="card-tag">Heritage &bull; Silk</span>
+                  <h4 class="card-title">Traditional Outlook</h4>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /coverflow-track -->
+
+          <!-- Floating Navigation Controls -->
+          <button class="coverflow-nav-btn coverflow-prev" id="cf-prev" aria-label="Previous Slide">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="coverflow-nav-btn coverflow-next" id="cf-next" aria-label="Next Slide">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div><!-- /coverflow-stage -->
+
+        <!-- Pagination Indicators -->
+        <div class="coverflow-dots" id="cf-dots"></div>
+      </div><!-- /coverflow-stage-wrapper -->
 
       <div class="teaser-center-action reveal-on-scroll">
         <a href="gallery.html" class="btn-pill-dark">
-          <span>Explore Interactive Filmstrip Gallery</span>
+          <span>Explore Full Gallery &amp; Cinema Archives</span>
           <span class="btn-arrow-circle-white">&rarr;</span>
         </a>
       </div>

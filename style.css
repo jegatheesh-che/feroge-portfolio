@@ -859,323 +859,193 @@ button {
 /* ==========================================================================
    4. Haute Couture Editorial Moodboard & Lookbook Poster (Matching Reference)
    ========================================================================== */
-.moodboard-section {
-  background: #f4f1ea;
-  padding: 100px 0;
+/* ==========================================================================
+   4. 3D Spatial Coverflow Carousel (Matching Luxury Reference)
+   ========================================================================== */
+.spatial-coverflow-section {
+  background: #f6f4ee;
+  padding: 100px 0 90px;
+  scroll-margin-top: 90px;
+  position: relative;
+  overflow: hidden;
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
+}
+
+.coverflow-stage-wrapper {
   position: relative;
-}
-
-.section-header-wrap {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto 3rem auto;
-}
-
-.section-main-heading {
-  font-size: clamp(2rem, 4.5vw, 2.8rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  color: var(--text-black);
-  margin-top: 0.8rem;
-  margin-bottom: 0.8rem;
-}
-
-.section-subtext {
-  font-size: 1.05rem;
-  color: var(--text-black-muted);
-  line-height: 1.6;
-}
-
-/* Moodboard Canvas Wrapper — grey textured board matching reference */
-.moodboard-canvas-wrapper {
-  background: #c8c4be;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.1'/%3E%3C/svg%3E");
-  padding: 2rem 2.2rem 2.5rem 2.2rem;
-  max-width: 660px;
   width: 100%;
-  margin: 0 auto;
-  position: relative;
-  box-sizing: border-box;
-  overflow: hidden;
-  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.28), 0 8px 24px rgba(0,0,0,0.14);
+  max-width: 1200px;
+  margin: 2.5rem auto 2.5rem;
 }
 
-/* Collage Canvas — 4-col × 4-row matching reference proportions */
-.moodboard-canvas {
-  display: grid;
-  grid-template-columns: 34% 20% 10% 36%;
-  grid-template-rows: 220px 120px 155px 145px;
-  gap: 9px;
+.coverflow-stage {
   position: relative;
+  width: 100%;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  touch-action: pan-y;
+  cursor: grab;
 }
 
-.moodboard-item {
-  position: relative;
-  border-radius: 0 !important;
-  overflow: visible;
-  cursor: pointer;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-style: preserve-3d;
+.coverflow-stage:active {
+  cursor: grabbing;
 }
 
-.moodboard-item .photo-inner {
+.coverflow-track {
   position: relative;
-  z-index: 2;
-  overflow: hidden;
-  background: #141414;
-  border-radius: 0 !important;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.moodboard-item .photo-inner img {
+.coverflow-card {
+  position: absolute;
+  width: 290px;
+  height: 430px;
+  cursor: pointer;
+  transform-origin: center center;
+  will-change: transform, opacity, z-index;
+  -webkit-tap-highlight-color: transparent;
+  visibility: visible;
+}
+
+.coverflow-card .card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #111111;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.coverflow-card.is-active .card-inner {
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.52), 0 0 30px rgba(184, 134, 11, 0.25);
+  border-color: rgba(184, 134, 11, 0.45);
+}
+
+.coverflow-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0 !important;
-  filter: none !important;
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.moodboard-item:hover {
-  z-index: 15 !important;
-  transform: perspective(1000px) translateY(-5px) rotateX(1.5deg) scale(1.02);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-}
-
-.moodboard-item:hover .photo-inner img {
-  transform: scale(1.06);
-}
-
-/* White Offset Frame Borders — 3.5px prominent as in reference */
-.offset-frame-white {
-  position: absolute;
-  border: 3.5px solid #ffffff;
-  border-radius: 0 !important;
-  z-index: 1;
+  display: block;
   pointer-events: none;
-  background: transparent;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  /* Default: top-right offset */
-  top: -9px;
-  right: -9px;
-  bottom: 9px;
-  left: 9px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.offset-frame-white.offset-left {
-  top: 8px;
-  right: -8px;
-  bottom: -8px;
-  left: 8px;
+.coverflow-card:hover img {
+  transform: scale(1.04);
 }
 
-.offset-frame-white.offset-right {
-  top: -8px;
-  right: 8px;
-  bottom: 8px;
-  left: -8px;
-}
-
-.offset-frame-white.offset-bottom {
-  top: 8px;
-  right: 8px;
-  bottom: -8px;
-  left: -8px;
-}
-
-.moodboard-item:hover .offset-frame-white {
-  transform: translate(-3px, 3px);
-}
-
-/* Item 1: Dark Manifesto Column — rows 1+2, col 1 */
-.item-manifesto {
-  grid-column: 1;
-  grid-row: 1 / 3;
-  background: #1c1c1c;
-  color: #ffffff;
-  padding: 1.5rem 1.3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 0 !important;
-  cursor: default;
-  z-index: 3;
-  overflow: hidden;
-}
-
-.item-manifesto:hover {
-  transform: none;
-}
-
-.manifesto-text {
-  font-family: var(--font-serif);
-  font-size: 0.79rem;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.82);
-  font-style: italic;
-}
-
-.manifesto-year {
-  font-family: var(--font-serif);
-  font-size: 2.9rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #ffffff;
-  line-height: 1;
-  margin-top: 0.8rem;
-}
-
-/* Item 2: Hero Feature Photo — row 1, cols 2-4 */
-.item-hero-photo {
-  grid-column: 2 / 5;
-  grid-row: 1;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-}
-
-.moodboard-label-top {
-  font-family: var(--font-mono);
-  font-size: 0.59rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #1a1a1a;
-  margin-bottom: 5px;
-  flex-shrink: 0;
-}
-
-.item-hero-photo .photo-inner {
-  flex: 1;
-}
-
-/* Item 3: Wide Landscape Shot — row 2, cols 1-2 */
-.item-wide-photo {
-  grid-column: 1 / 3;
-  grid-row: 2;
-  z-index: 4;
-}
-
-/* Item 4: Tall Portrait Right — rows 2+3, cols 3-4 */
-.item-tall-photo {
-  grid-column: 3 / 5;
-  grid-row: 2 / 4;
-  z-index: 3;
-}
-
-/* Item 5: Bottom-Left Portrait — rows 3+4, col 1 */
-.item-bottom-left {
-  grid-column: 1;
-  grid-row: 3 / 5;
-  z-index: 5;
-}
-
-/* Item 6: Bottom-Center Portrait — row 3, col 2 */
-.item-bottom-center {
-  grid-column: 2;
-  grid-row: 3;
-  z-index: 4;
-}
-
-/* Item 7: Vertical Year Tag — row 4, col 2 */
-.item-tag-block {
-  grid-column: 2;
-  grid-row: 4;
-  background: #1c1c1c;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0 !important;
-  cursor: default;
-  z-index: 4;
-  overflow: hidden;
-}
-
-.item-tag-block:hover {
-  transform: none;
-}
-
-.vertical-year {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-}
-
-/* Item 8: Script + Bold Typography — row 4, cols 3-4 */
-.item-signature-typography {
-  grid-column: 3 / 5;
-  grid-row: 4;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 0.5rem;
-  border-radius: 0 !important;
-  cursor: default;
-  z-index: 6;
-}
-
-.item-signature-typography:hover {
-  transform: none;
-}
-
-.script-accent {
-  font-family: var(--font-script);
-  font-size: 2.9rem;
-  color: #111111;
-  line-height: 0.82;
-  margin-bottom: 0.2rem;
-}
-
-.serif-bold-heading {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #000000;
-  line-height: 1.15;
-}
-
-/* Floating Circular Controls — matching reference's white circle buttons */
-.moodboard-floating-controls {
+.coverflow-card .card-overlay {
   position: absolute;
-  bottom: -22px;
-  right: -22px;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.3) 45%, rgba(0, 0, 0, 0) 75%);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  z-index: 20;
+  justify-content: flex-end;
+  padding: 1.5rem 1.3rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
 }
 
-.mb-control-btn {
-  width: 46px;
-  height: 46px;
-  background: #ffffff;
-  color: #000000;
-  border: none;
-  border-radius: 50% !important;
+.coverflow-card.is-active .card-overlay,
+.coverflow-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.coverflow-card .card-tag {
+  font-family: var(--font-primary);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b8860b;
+  margin-bottom: 0.25rem;
+}
+
+.coverflow-card .card-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Floating Navigation Buttons - Safe Margins Outside Cards */
+.coverflow-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  color: #111111;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 40;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.mb-control-btn:hover {
-  background: #111111;
+.coverflow-nav-btn:hover {
+  background: #b8860b;
   color: #ffffff;
-  transform: scale(1.12);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+  border-color: #b8860b;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 12px 30px rgba(184, 134, 11, 0.35);
+}
+
+.coverflow-prev { left: 20px; }
+.coverflow-next { right: 20px; }
+
+@media (min-width: 1300px) {
+  .coverflow-prev { left: calc(50% - 580px); }
+  .coverflow-next { right: calc(50% - 580px); }
+}
+
+/* Dots indicator */
+.coverflow-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+}
+
+.cf-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+}
+
+.cf-dot.active {
+  width: 24px;
+  border-radius: 20px;
+  background: #b8860b;
+  box-shadow: 0 2px 10px rgba(184, 134, 11, 0.4);
 }
 
 
@@ -1822,140 +1692,43 @@ button {
   /* =========================================================================
      MOBILE EDITORIAL MOODBOARD SPREAD (Magazine 2-Column High-Fashion Grid)
      ========================================================================= */
-  .moodboard-section {
-    padding: 60px 0;
+  /* =========================================================================
+     MOBILE 3D SPATIAL COVERFLOW (Touch-Optimized Cascade Carousel)
+     ========================================================================= */
+  .spatial-coverflow-section {
+    padding: 105px 0 65px;
+    scroll-margin-top: 85px;
     overflow: hidden;
   }
   
-  .moodboard-canvas-wrapper {
-    padding: 1rem 0.85rem;
-    max-width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
+  .coverflow-stage-wrapper {
+    margin: 1.2rem auto 1.8rem;
   }
   
-  .moodboard-canvas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    gap: 9px;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+  .coverflow-stage {
+    height: 410px;
   }
   
-  .item-manifesto {
-    grid-column: 1 / 2;
-    grid-row: 1;
-    padding: 1.1rem 0.9rem;
-    min-height: 200px;
-    overflow: hidden;
+  .coverflow-card {
+    width: 240px;
+    height: 350px;
   }
   
-  .manifesto-text {
-    font-size: 0.76rem;
-    line-height: 1.45;
+  .coverflow-card .card-inner {
+    border-radius: 22px;
   }
   
-  .manifesto-year {
-    font-size: 2.1rem;
-    margin-top: 0.5rem;
-  }
-  
-  .item-hero-photo {
-    grid-column: 2 / 3;
-    grid-row: 1;
-    min-height: 200px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .item-hero-photo .photo-inner {
-    aspect-ratio: auto;
-    height: 100%;
-  }
-  
-  .moodboard-label-top {
-    font-size: 0.52rem;
-    letter-spacing: 0.08em;
-    margin-bottom: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-  }
-  
-  .item-wide-photo {
-    grid-column: 1 / 3;
-    grid-row: 2;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-  }
-  
-  .item-tall-photo {
-    grid-column: 1 / 2;
-    grid-row: 3;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-  }
-  
-  .item-bottom-left {
-    grid-column: 2 / 3;
-    grid-row: 3;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-  }
-  
-  .item-bottom-center {
-    grid-column: 1 / 2;
-    grid-row: 4;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-  }
-  
-  .item-tag-block {
-    grid-column: 2 / 3;
-    grid-row: 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #1c1c1c;
-    color: #ffffff;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-  }
-  
-  .vertical-year {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-size: 0.95rem;
-    letter-spacing: 0.2em;
-  }
-  
-  .item-signature-typography {
-    grid-column: 1 / 3;
-    grid-row: 5;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 1.2rem 0 0.4rem 0;
-  }
-  
-  .script-accent {
-    font-size: 2.4rem;
-    line-height: 0.9;
-  }
-  
-  .serif-bold-heading {
-    font-size: 1.05rem;
-    letter-spacing: 0.12em;
-  }
-  
-  .offset-frame-white {
+  /* On mobile touch devices, clean swipe navigation without intrusive overlapping arrows */
+  .coverflow-nav-btn {
     display: none;
+  }
+  
+  .coverflow-card .card-title {
+    font-size: 1.05rem;
+  }
+  
+  .coverflow-card .card-overlay {
+    padding: 1rem 0.9rem;
   }
   
   /* Comp Card Mobile */
@@ -4002,7 +3775,142 @@ html, body {
     width: 100%;
     box-sizing: border-box;
   }
+
+
+/* ==========================================================================
+   Category Filter Nav Bar & Dynamic Gallery Cards
+   ========================================================================== */
+.gallery-filter-wrapper {
+  position: sticky;
+  top: 70px;
+  z-index: 90;
+  background: rgba(247, 244, 239, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(109, 0, 26, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
 }
+
+.filter-pills-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.filter-pill-btn {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(109, 0, 26, 0.2);
+  color: var(--burgundy-deep, #6d001a);
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  user-select: none;
+}
+
+.filter-pill-btn .count-badge {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  background: rgba(109, 0, 26, 0.08);
+  padding: 0.15rem 0.45rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.filter-pill-btn:hover {
+  background: rgba(109, 0, 26, 0.08);
+  border-color: var(--burgundy-deep, #6d001a);
+  transform: translateY(-2px);
+}
+
+.filter-pill-btn.active {
+  background: var(--burgundy-deep, #6d001a);
+  color: #ffffff;
+  border-color: var(--burgundy-deep, #6d001a);
+  box-shadow: 0 4px 18px rgba(109, 0, 26, 0.3);
+}
+
+.filter-pill-btn.active .count-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  opacity: 1;
+}
+
+.gallery-grid-dynamic {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.gallery-card-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  aspect-ratio: 3 / 4;
+  cursor: pointer;
+  background: #e8e3dc;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, opacity 0.4s ease;
+}
+
+.gallery-card-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-card-item:hover img {
+  transform: scale(1.06);
+}
+
+.gallery-card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(109, 0, 26, 0.18);
+}
+
+@media (max-width: 768px) {
+  .gallery-filter-wrapper {
+    top: 60px;
+    padding: 0.9rem 0;
+  }
+  .filter-pills-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0 1rem;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filter-pills-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .filter-pill-btn {
+    white-space: nowrap;
+    font-size: 0.75rem;
+    padding: 0.45rem 0.9rem;
+  }
+  .gallery-grid-dynamic {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+}
+
 
 
 

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photo Galleries — Feroge Portfolio</title>
-  <meta name="description" content="Explore Feroge's photo galleries, asymmetric editorial lookbooks, movie stills from Madharasi and The Dorm, and interactive staggered filmstrip.">
+  <title>Photo Gallery — Feroge Model Portfolio</title>
+  <meta name="description" content="Explore Feroge's curated photo galleries — formal, monochrome, streetwear, traditional, urban and sport fashion shoots.">
   
   <!-- Google Fonts: Plus Jakarta Sans, Playfair Display & Pinyon Script -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +13,871 @@
   
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* =========================================================
+       GALLERY PAGE — Redesign 2.0 (Dark Editorial Studio)
+       ========================================================= */
+    body.gallery-page-body {
+      background: #0d0d0d;
+    }
+
+    /* ── Hero Split Layout ── */
+    .gal-hero {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: 100vh;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+
+    /* LEFT DARK PANEL */
+    .gal-panel {
+      background: #111111;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 2.5rem;
+      padding: 3rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      z-index: 2;
+    }
+
+    .gal-panel-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.2rem;
+    }
+
+    .gal-panel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+    }
+
+    .gal-panel-title em {
+      font-style: italic;
+      color: #b8860b;
+    }
+
+    .gal-panel-desc {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 2rem;
+    }
+
+    .gal-panel-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .gal-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .gal-stat-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .gal-panel-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 2rem 0;
+    }
+
+    /* Category Sidebar Filters */
+    .gal-cat-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .gal-cat-item {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .gal-cat-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 0.95rem 0;
+      cursor: pointer;
+      color: rgba(255,255,255,0.45);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+
+    .gal-cat-btn:hover { color: #ffffff; padding-left: 8px; }
+
+    .gal-cat-btn.active {
+      color: #ffffff;
+      padding-left: 8px;
+    }
+
+    .gal-cat-btn.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 3px;
+      height: 1.8rem;
+      background: #b8860b;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .gal-cat-count {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.06);
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .gal-cat-btn.active .gal-cat-count {
+      background: #b8860b;
+      color: #000;
+    }
+
+    .gal-panel-bottom {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+      margin-top: auto;
+    }
+
+    /* RIGHT CONTENT AREA */
+    .gal-content {
+      position: relative;
+      overflow: hidden;
+      background: #141414;
+    }
+
+    /* Big watermark title */
+    .gal-title-watermark {
+      position: absolute;
+      top: 0;
+      right: 0;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      line-height: 0.85;
+      overflow: hidden;
+    }
+
+    .gal-title-watermark .wm-photo {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(5rem, 10vw, 9rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.04);
+    }
+
+    .gal-title-watermark .wm-gallery {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(6rem, 13vw, 13rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.06);
+      margin-top: -1rem;
+    }
+
+    /* Grid area */
+    .gal-grid-wrap {
+      position: relative;
+      z-index: 2;
+      padding: 3rem 2.5rem 4rem;
+    }
+
+    /* Masonry via CSS columns */
+    .gal-masonry {
+      columns: 3;
+      column-gap: 12px;
+    }
+
+    .gal-card {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 4px;
+      background: #1a1a1a;
+      display: block;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      user-select: none;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    }
+
+    .gal-card:active {
+      transform: scale(0.97) !important;
+    }
+
+    .gal-card:nth-child(3n+1) { aspect-ratio: 3/4; }
+    .gal-card:nth-child(3n+2) { aspect-ratio: 4/5; }
+    .gal-card:nth-child(3n)   { aspect-ratio: 2/3; }
+
+    .gal-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gal-card:hover img { transform: scale(1.07); }
+
+    .gal-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem;
+      pointer-events: none;
+    }
+
+    .gal-card:hover .gal-card-overlay { opacity: 1; }
+
+    .gal-card-tag {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #b8860b;
+      margin-bottom: 0.3rem;
+    }
+
+    .gal-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    /* "Click to View" Glass Pill Badge */
+    .gal-card-expand {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 0.4rem 0.8rem;
+      border-radius: 30px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(-4px) scale(0.92);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 3;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+
+    .gal-card:hover .gal-card-expand {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      background: #b8860b;
+      color: #000000;
+      border-color: #b8860b;
+      box-shadow: 0 4px 18px rgba(184, 134, 11, 0.45);
+    }
+
+    .gal-section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      gap: 1rem;
+    }
+
+    .gal-head-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .gal-click-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(184, 134, 11, 0.9);
+      letter-spacing: 0.04em;
+    }
+
+    .gal-active-label {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .gal-result-count {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       ULTRA-LUXURY EDITORIAL IMAGE SLIDER & VIEWER
+       ═══════════════════════════════════════════════════════════ */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(18, 18, 18, 0.98) 0%, rgba(6, 6, 6, 0.99) 100%);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.25rem 2rem 1.2rem;
+      user-select: none;
+      opacity: 0;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Top Bar */
+    .lb-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      z-index: 10;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .lb-brand-tag {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .lb-brand-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #b8860b;
+      box-shadow: 0 0 10px rgba(184, 134, 11, 0.8);
+      display: inline-block;
+    }
+
+    .lb-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .lb-photo-counter {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #b8860b;
+      background: rgba(184, 134, 11, 0.08);
+      border: 1px solid rgba(184, 134, 11, 0.22);
+      padding: 0.35rem 0.85rem;
+      border-radius: 30px;
+      letter-spacing: 0.08em;
+    }
+
+    .lb-close-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      line-height: 1;
+    }
+
+    .lb-close-btn:hover {
+      background: #ffffff;
+      color: #000000;
+      transform: rotate(90deg) scale(1.05);
+    }
+
+    /* Main Slider Stage */
+    .lb-stage-wrapper {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-height: calc(100vh - 190px);
+      gap: 1.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .lb-stage {
+      position: relative;
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .lb-slide-container {
+      position: relative;
+      max-height: calc(100vh - 270px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      cursor: grab;
+    }
+
+    .lb-slide-container:active {
+      cursor: grabbing;
+    }
+
+    .lb-main-img {
+      max-height: calc(100vh - 270px);
+      max-width: 82vw;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      pointer-events: auto;
+    }
+
+    .lb-caption {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 0.85rem;
+      text-align: center;
+    }
+
+    .lb-category-tag {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #b8860b;
+    }
+
+    .lb-photo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .lb-arrow {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      z-index: 10;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lb-arrow:hover {
+      background: #b8860b;
+      color: #000000;
+      border-color: #b8860b;
+      transform: scale(1.1);
+      box-shadow: 0 0 24px rgba(184, 134, 11, 0.45);
+    }
+
+    .lb-arrow:active {
+      transform: scale(0.95);
+    }
+
+    /* Bottom Interactive Thumbnail Filmstrip */
+    .lb-filmstrip-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+      padding-top: 0.3rem;
+    }
+
+    .lb-filmstrip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 14px;
+      max-width: 860px;
+      width: 100%;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      touch-action: pan-x;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .lb-filmstrip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .lb-thumb {
+      width: 44px;
+      height: 58px;
+      flex-shrink: 0;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.4;
+      border: 2px solid transparent;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      scroll-snap-align: center;
+      background: #1a1a1a;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lb-thumb:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+
+    .lb-thumb.active {
+      opacity: 1;
+      border-color: #b8860b;
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 0 16px rgba(184, 134, 11, 0.5);
+    }
+
+    .lb-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* ── Responsive: Tablet Breakpoint (769px to 1024px) ── */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .gal-hero {
+        grid-template-columns: 240px 1fr;
+        padding-top: 80px;
+      }
+      .gal-panel {
+        padding: 2.2rem 1.4rem;
+        gap: 1.8rem;
+      }
+      .gal-masonry {
+        columns: 2;
+        column-gap: 10px;
+      }
+      .gal-grid-wrap {
+        padding: 2.2rem 1.5rem 3.5rem;
+      }
+      .lb-stage {
+        max-width: 88vw;
+      }
+    }
+
+    /* ── Responsive & Mobile Native App Styling (<= 768px) ── */
+    @media (max-width: 768px) {
+      .gal-hero { 
+        grid-template-columns: 1fr; 
+        min-height: auto; 
+        padding-top: 70px;
+      }
+
+      /* Sticky App-Style Filter Bar */
+      .gal-panel {
+        position: sticky;
+        top: 70px;
+        z-index: 99;
+        background: rgba(13, 13, 13, 0.94);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        padding: 0.75rem 0.85rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+      }
+
+      .gal-panel-bottom {
+        display: none;
+      }
+
+      /* Horizontal Momentum Touch Filter Strip */
+      .gal-cat-list { 
+        display: flex; 
+        flex-wrap: nowrap; 
+        overflow-x: auto; 
+        gap: 0.55rem; 
+        padding: 0.2rem 1.5rem 0.2rem 0.2rem;
+        scrollbar-width: none; 
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        touch-action: pan-x;
+        mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+      }
+
+      .gal-cat-list::-webkit-scrollbar { display: none; }
+      
+      .gal-cat-item { 
+        border-bottom: none; 
+        flex-shrink: 0; 
+        scroll-snap-align: start;
+      }
+
+      .gal-cat-btn { 
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1.15rem; 
+        border: 1px solid rgba(255,255,255,0.14); 
+        border-radius: 50px; 
+        font-size: 0.76rem; 
+        font-weight: 700;
+        white-space: nowrap; 
+        background: rgba(255,255,255,0.04);
+        color: rgba(255,255,255,0.7);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .gal-cat-btn:active {
+        transform: scale(0.94);
+      }
+
+      .gal-cat-btn.active { 
+        background: #b8860b; 
+        color: #000000; 
+        padding-left: 1.15rem; 
+        border-color: #b8860b; 
+        box-shadow: 0 4px 16px rgba(184, 134, 11, 0.35);
+      }
+
+      .gal-cat-btn.active::before { display: none; }
+
+      .gal-grid-wrap { padding: 1.2rem 0.85rem 3rem; }
+      .gal-masonry { columns: 2; column-gap: 8px; }
+      .gal-card { margin-bottom: 8px; }
+
+      /* Mobile Card Touch Display - Clean Non-Destructive Gradient */
+      .gal-card-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0) 60%);
+        padding: 0.85rem 0.75rem;
+      }
+
+      .gal-card-tag {
+        font-size: 0.58rem;
+        margin-bottom: 0.15rem;
+      }
+
+      .gal-card-title {
+        font-size: 0.85rem;
+      }
+
+      /* Compact, Intact Glass Pill on Mobile */
+      .gal-card-expand {
+        opacity: 1;
+        transform: none;
+        top: 8px;
+        right: 8px;
+        padding: 0.32rem 0.65rem;
+        font-size: 0.58rem;
+        gap: 4px;
+        background: rgba(0, 0, 0, 0.65);
+      }
+
+      .gal-card-expand svg {
+        width: 10px;
+        height: 10px;
+      }
+
+      .gal-section-head {
+        display: none;
+      }
+
+      .gal-title-watermark .wm-photo { font-size: 3rem; }
+      .gal-title-watermark .wm-gallery { font-size: 4rem; }
+
+      /* Mobile Native Fullscreen Lightbox Slider */
+      .lightbox-modal {
+        padding: 0.85rem 0.75rem 0.65rem;
+      }
+
+      .lb-topbar {
+        padding-bottom: 0.4rem;
+      }
+
+      .lb-brand-tag {
+        font-size: 0.6rem;
+        letter-spacing: 0.12em;
+      }
+
+      .lb-stage-wrapper {
+        position: relative;
+        max-height: calc(100vh - 170px);
+        margin: 0.25rem 0;
+        gap: 0;
+      }
+
+      .lb-arrow {
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+        width: 38px;
+        height: 38px;
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .lb-prev-btn { left: 4px; }
+      .lb-next-btn { right: 4px; }
+
+      .lb-slide-container {
+        max-height: calc(100vh - 245px);
+      }
+
+      .lb-main-img {
+        max-height: calc(100vh - 245px);
+        max-width: 90vw;
+        border-radius: 8px;
+      }
+
+      .lb-caption {
+        margin-top: 0.5rem;
+      }
+
+      .lb-photo-title {
+        font-size: 0.92rem;
+      }
+
+      .lb-filmstrip-wrap {
+        padding-top: 0.2rem;
+      }
+
+      .lb-filmstrip {
+        gap: 6px;
+        padding: 4px 8px;
+        border-radius: 10px;
+      }
+
+      .lb-thumb {
+        width: 34px;
+        height: 46px;
+      }
+
+      .lb-close-btn {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gal-grid-wrap { padding: 1rem 0.65rem 3rem; }
+      .gal-masonry { columns: 2; column-gap: 6px; }
+      .gal-card { margin-bottom: 6px; }
+      .gal-card-overlay { padding: 0.65rem 0.55rem; }
+      .gal-card-title { font-size: 0.78rem; line-height: 1.2; }
+      .gal-card-tag { font-size: 0.55rem; }
+      .gal-title-watermark .wm-photo { font-size: 2.2rem; }
+      .gal-title-watermark .wm-gallery { font-size: 2.8rem; }
+    }
+  </style>
 </head>
 <body class="gallery-page-body">
 
@@ -93,191 +958,232 @@
     </div>
   </div>
 
-  <!-- Page Header Banner -->
-  <section class="page-banner-section bg-cream">
-    <div class="container">
-      <div class="page-banner-content reveal-on-scroll">
-        <div class="pill-badge pill-badge-light">
-          <span>GALLERY &bull; ARCHIVES</span>
-        </div>
-        <h1 class="page-banner-title">Some Of Our Photo Galleries</h1>
-        <p class="page-banner-subtext">Curated lookbook archives featuring modelling fashion shoots and stills from feature films <em>Madharasi</em> &amp; <em>The Dorm</em>.</p>
-      </div>
-    </div>
-  </section>
 
+  <!-- ═══════════════════════════════════════
+       GALLERY HERO SPLIT LAYOUT
+       ═══════════════════════════════════════ -->
+  <div class="gal-hero">
 
+    <!-- LEFT DARK EDITORIAL PANEL -->
+    <aside class="gal-panel">
+      <div>
 
+        <!-- Category Sidebar Filters -->
 
-  <!-- 2. Asymmetric Interlocking Editorial Gallery Grid (Exact Match to Reference Composition) -->
-  <main class="gallery-editorial-section">
-    <div class="container">
-      
-      <div class="asymmetric-gallery-wrapper">
-        
-        <!-- Kinetic Watermark Banner Top -->
-        <div class="gallery-watermark-strip watermark-left">
-          <span>FEROGE &bull; HAUTE COUTURE &bull; EDITORIAL 2026 &bull; CINEMA PORTFOLIO &bull;&nbsp;</span>
-        </div>
-
-        <!-- CLUSTER 1 (Top Block: Hero Left + 2x2 Right) -->
-        <div class="gallery-cluster reveal-on-scroll">
-          
-          <div class="cluster-hero-box curtain-reveal reveal-on-scroll" data-src="images/feroge_21.webp">
-            <div class="curtain-panel curtain-panel-primary"></div>
-            <div class="curtain-panel curtain-panel-secondary"></div>
-            <img src="images/feroge_21.webp" alt="Feroge White Suit Profile" class="curtain-img" loading="lazy" decoding="async" style="object-position: center 25%;">
-            <div class="photo-caption-overlay">
-              <span class="caption-tag">MODELLING &bull; HIGH FASHION</span>
-              <h3 class="caption-title">Haute White Suit Profile</h3>
-            </div>
-          </div>
-
-          <div class="cluster-subgrid-box">
-            <div class="subgrid-card" data-src="images/feroge_76.webp">
-              <img src="images/feroge_76.webp" alt="Feroge Streetwear Walk" loading="lazy" decoding="async" style="object-position: center 25%;">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">EDITORIAL</span>
-                <h4 class="caption-title">Urban Cobblestone Walk</h4>
-              </div>
-            </div>
-
-            <div class="subgrid-card" data-src="images/feroge_79.webp">
-              <img src="images/feroge_79.webp" alt="Feroge Cinema Still Madharasi" loading="lazy" decoding="async" style="object-position: center 20%;">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">FEATURE FILM</span>
-                <h4 class="caption-title">Madharasi Movie Still</h4>
-              </div>
-            </div>
-
-            <div class="subgrid-card" data-src="images/feroge_18.webp">
-              <img src="images/feroge_18.webp" alt="Feroge Trench Coat" loading="lazy" decoding="async" style="object-position: center 25%;">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">MODELLING</span>
-                <h4 class="caption-title">Trench Coat Silhouette</h4>
-              </div>
-            </div>
-
-            <div class="subgrid-card" data-src="images/feroge_73.webp">
-              <img src="images/feroge_73.webp" alt="Feroge Headshot" loading="lazy" decoding="async" style="object-position: center 25%;">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">ACTOR PORTRAITS</span>
-                <h4 class="caption-title">Studio Spotlight Headshot</h4>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Kinetic Watermark Banner Middle -->
-        <div class="gallery-watermark-strip watermark-right">
-          <span>FEATURE FILMS &bull; MADHARASI &bull; THE DORM &bull; CINEMA ARCHIVES &bull;&nbsp;</span>
-        </div>
-
-        <!-- CLUSTER 2 (Middle Block: 2x2 Left + Hero Right) -->
-        <div class="gallery-cluster gallery-cluster-reversed reveal-on-scroll" data-delay="150">
-          
-          <div class="cluster-subgrid-box">
-            <div class="subgrid-card" data-src="images/feroge_10.webp">
-              <img src="images/feroge_10.webp" alt="Feroge Red Suit" style="object-position: center 20%;">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">RUNWAY</span>
-                <h4 class="caption-title">Commanding Red Suit</h4>
-              </div>
-            </div>
-
-            <div class="subgrid-card" data-src="images/feroge_12.webp">
-              <img src="images/feroge_12.webp" alt="Feroge Emerald Polo">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">EDITORIAL</span>
-                <h4 class="caption-title">Emerald Knit Polo</h4>
-              </div>
-            </div>
-
-            <div class="subgrid-card" data-src="images/feroge_78.webp">
-              <img src="images/feroge_78.webp" alt="Feroge Cinema Still The Dorm" style="object-position: center 20%;">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">FEATURE FILM</span>
-                <h4 class="caption-title">The Dorm Movie Still</h4>
-              </div>
-            </div>
-
-            <div class="subgrid-card" data-src="images/feroge_2.webp">
-              <img src="images/feroge_2.webp" alt="Feroge Studio Pose">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">PORTRAIT</span>
-                <h4 class="caption-title">Studio Casual Look</h4>
-              </div>
-            </div>
-          </div>
-
-          <div class="cluster-hero-box curtain-reveal reveal-on-scroll" data-src="images/feroge_19.webp">
-            <div class="curtain-panel curtain-panel-primary"></div>
-            <div class="curtain-panel curtain-panel-secondary"></div>
-            <img src="images/feroge_19.webp" alt="Feroge Runway Walk" class="curtain-img">
-            <div class="photo-caption-overlay">
-              <span class="caption-tag">RUNWAY &bull; PRESENTATION</span>
-              <h3 class="caption-title">Runway Presentation Walk</h3>
-            </div>
-          </div>
-
-        </div>
-
-
-        <!-- CLUSTER 3 (Bottom Block: Hero Left + 2x2 Right) -->
-        <div class="gallery-cluster reveal-on-scroll" data-delay="300">
-          
-          <div class="cluster-hero-box curtain-reveal reveal-on-scroll" data-src="images/feroge_34.webp">
-            <div class="curtain-panel curtain-panel-primary"></div>
-            <div class="curtain-panel curtain-panel-secondary"></div>
-            <img src="images/feroge_34.webp" alt="Feroge Spotlight Editorial" class="curtain-img">
-            <div class="photo-caption-overlay">
-              <span class="caption-tag">CINEMA &amp; EDITORIAL</span>
-              <h3 class="caption-title">Haute Couture Spotlight</h3>
-            </div>
-          </div>
-
-          <div class="cluster-subgrid-box">
-            <div class="subgrid-card" data-src="images/feroge_27.webp">
-              <img src="images/feroge_27.webp" alt="Feroge Fashion Shoot">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">MODELLING</span>
-                <h4 class="caption-title">Fashion Week Shoot</h4>
-              </div>
-            </div>
-
-            <div class="subgrid-card" data-src="images/feroge_28.webp">
-              <img src="images/feroge_28.webp" alt="Feroge Studio Pose">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">HIGH FASHION</span>
-                <h4 class="caption-title">High-Fashion Pose</h4>
-              </div>
-            </div>
-
-            <div class="subgrid-card" data-src="images/feroge_35.webp">
-              <img src="images/feroge_35.webp" alt="Feroge Portrait Shoot">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">PORTRAITS</span>
-                <h4 class="caption-title">Studio Editorial Shot</h4>
-              </div>
-            </div>
-
-            <div class="subgrid-card" data-src="images/feroge_63.webp">
-              <img src="images/feroge_63.webp" alt="Feroge Commercial Shoot">
-              <div class="photo-caption-overlay">
-                <span class="caption-tag">CAMPAIGNS</span>
-                <h4 class="caption-title">Commercial Campaign</h4>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
+        <ul class="gal-cat-list">
+          <li class="gal-cat-item">
+            <button class="gal-cat-btn active" data-filter="all">
+              <span>All Works</span>
+            </button>
+          </li>
+          <li class="gal-cat-item">
+            <button class="gal-cat-btn" data-filter="formal">
+              <span>Formal Outlook</span>
+            </button>
+          </li>
+          <li class="gal-cat-item">
+            <button class="gal-cat-btn" data-filter="monochrome">
+              <span>Monochrome</span>
+            </button>
+          </li>
+          <li class="gal-cat-item">
+            <button class="gal-cat-btn" data-filter="sport">
+              <span>Sport Wear</span>
+            </button>
+          </li>
+          <li class="gal-cat-item">
+            <button class="gal-cat-btn" data-filter="street">
+              <span>Street Wear</span>
+            </button>
+          </li>
+          <li class="gal-cat-item">
+            <button class="gal-cat-btn" data-filter="tshirt">
+              <span>T-Shirt Look</span>
+            </button>
+          </li>
+          <li class="gal-cat-item">
+            <button class="gal-cat-btn" data-filter="traditional">
+              <span>Traditional Wear</span>
+            </button>
+          </li>
+          <li class="gal-cat-item">
+            <button class="gal-cat-btn" data-filter="urban">
+              <span>Urban Style</span>
+            </button>
+          </li>
+        </ul>
       </div>
 
-    </div>
-  </main>
+      <div class="gal-panel-bottom">&copy; 2026 Feroge Portfolio</div>
+    </aside>
 
+    <!-- RIGHT CONTENT: Watermark + Masonry Grid -->
+    <div class="gal-content">
+
+      <!-- Oversized PHOTO GALLERY watermark title -->
+      <div class="gal-title-watermark" aria-hidden="true">
+        <span class="wm-photo">PHOTO</span>
+        <span class="wm-gallery">GALLERY</span>
+      </div>
+
+      <!-- Grid area -->
+      <div class="gal-grid-wrap">
+        <div class="gal-section-head">
+          <h2 class="gal-active-label" id="gal-active-label">All Works</h2>
+        </div>
+
+        <!-- MASONRY GRID — 23 Photos -->
+        <div class="gal-masonry" id="gal-masonry">
+
+          <!-- FORMAL OUTLOOK (4) -->
+          <div class="gal-card" data-category="formal" data-src="images/gallery/formal outlook/formal_01.webp">
+            <img src="images/gallery/formal outlook/formal_01.webp" alt="Feroge Tailored Formal Suit" loading="eager" fetchpriority="high" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Formal Outlook</span><p class="gal-card-title">Tailored Formal Suit</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="formal" data-src="images/gallery/formal outlook/formal_02.webp">
+            <img src="images/gallery/formal outlook/formal_02.webp" alt="Feroge Classic Black Tie" loading="eager" fetchpriority="high" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Formal Outlook</span><p class="gal-card-title">Classic Black Tie</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="formal" data-src="images/gallery/formal outlook/formal_03.webp">
+            <img src="images/gallery/formal outlook/formal_03.webp" alt="Feroge Executive Lookbook" loading="eager" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Formal Outlook</span><p class="gal-card-title">Executive Lookbook</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="formal" data-src="images/gallery/formal outlook/formal_04.webp">
+            <img src="images/gallery/formal outlook/formal_04.webp" alt="Feroge Haute Couture Blazer" loading="eager" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Formal Outlook</span><p class="gal-card-title">Haute Couture Blazer</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <!-- MONOCHROME (4) -->
+          <div class="gal-card" data-category="monochrome" data-src="images/gallery/monochrome outlook/monochrome_01.webp">
+            <img src="images/gallery/monochrome outlook/monochrome_01.webp" alt="Feroge Noir Studio Spotlight" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Monochrome</span><p class="gal-card-title">Noir Studio Spotlight</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="monochrome" data-src="images/gallery/monochrome outlook/monochrome_02.webp">
+            <img src="images/gallery/monochrome outlook/monochrome_02.webp" alt="Feroge High-Contrast Shadow" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Monochrome</span><p class="gal-card-title">High-Contrast Shadow</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="monochrome" data-src="images/gallery/monochrome outlook/monochrome_03.webp">
+            <img src="images/gallery/monochrome outlook/monochrome_03.webp" alt="Feroge Monochrome Editorial" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Monochrome</span><p class="gal-card-title">Monochrome Editorial</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="monochrome" data-src="images/gallery/monochrome outlook/monochrome_04.webp">
+            <img src="images/gallery/monochrome outlook/monochrome_04.webp" alt="Feroge Minimalist Noir" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Monochrome</span><p class="gal-card-title">Minimalist Noir Profile</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <!-- SPORT WEAR (3) -->
+          <div class="gal-card" data-category="sport" data-src="images/gallery/sport wear/sport_01.webp">
+            <img src="images/gallery/sport wear/sport_01.webp" alt="Feroge Athletic Performance" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Sport Wear</span><p class="gal-card-title">Athletic Performance Fit</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="sport" data-src="images/gallery/sport wear/sport_02.webp">
+            <img src="images/gallery/sport wear/sport_02.webp" alt="Feroge Active Motion Shoot" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Sport Wear</span><p class="gal-card-title">Active Motion Shoot</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="sport" data-src="images/gallery/sport wear/sport_03.webp">
+            <img src="images/gallery/sport wear/sport_03.webp" alt="Feroge Sport Luxe Apparel" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Sport Wear</span><p class="gal-card-title">Sport Luxe Apparel</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <!-- STREET WEAR (2) -->
+          <div class="gal-card" data-category="street" data-src="images/gallery/street wear/street_01.webp">
+            <img src="images/gallery/street wear/street_01.webp" alt="Feroge Urban Cobblestone Walk" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Street Wear</span><p class="gal-card-title">Urban Cobblestone Walk</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="street" data-src="images/gallery/street wear/street_02.webp">
+            <img src="images/gallery/street wear/street_02.webp" alt="Feroge Downtown Street Look" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Street Wear</span><p class="gal-card-title">Downtown Street Look</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <!-- T-SHIRT LOOK (3) -->
+          <div class="gal-card" data-category="tshirt" data-src="images/gallery/t-shirt look/t-shirt_01.webp">
+            <img src="images/gallery/t-shirt look/t-shirt_01.webp" alt="Feroge Minimalist Cotton Tee" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">T-Shirt Look</span><p class="gal-card-title">Minimalist Cotton Tee</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="tshirt" data-src="images/gallery/t-shirt look/t-shirt_02.webp">
+            <img src="images/gallery/t-shirt look/t-shirt_02.webp" alt="Feroge Urban Graphic Tee" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">T-Shirt Look</span><p class="gal-card-title">Urban Graphic Tee</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="tshirt" data-src="images/gallery/t-shirt look/t-shirt_03.webp">
+            <img src="images/gallery/t-shirt look/t-shirt_03.webp" alt="Feroge Relaxed Casual Fit" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">T-Shirt Look</span><p class="gal-card-title">Relaxed Casual Fit</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <!-- TRADITIONAL WEAR (4) -->
+          <div class="gal-card" data-category="traditional" data-src="images/gallery/traditional wear outlook/traditional_01.webp">
+            <img src="images/gallery/traditional wear outlook/traditional_01.webp" alt="Feroge Heritage Ethnic Silk" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Traditional Wear</span><p class="gal-card-title">Heritage Ethnic Silk</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="traditional" data-src="images/gallery/traditional wear outlook/traditional_02.webp">
+            <img src="images/gallery/traditional wear outlook/traditional_02.webp" alt="Feroge Royal Ethnic Silhouette" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Traditional Wear</span><p class="gal-card-title">Royal Ethnic Silhouette</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="traditional" data-src="images/gallery/traditional wear outlook/traditional_03.webp">
+            <img src="images/gallery/traditional wear outlook/traditional_03.webp" alt="Feroge Cultural Draped Outfit" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Traditional Wear</span><p class="gal-card-title">Cultural Draped Outfit</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="traditional" data-src="images/gallery/traditional wear outlook/traditional_04.webp">
+            <img src="images/gallery/traditional wear outlook/traditional_04.webp" alt="Feroge Festive Ethnic Couture" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Traditional Wear</span><p class="gal-card-title">Festive Ethnic Couture</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <!-- URBAN STYLE (3) -->
+          <div class="gal-card" data-category="urban" data-src="images/gallery/urban style/urban_01.webp">
+            <img src="images/gallery/urban style/urban_01.webp" alt="Feroge Modern City Casual" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Urban Style</span><p class="gal-card-title">Modern City Casual</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="urban" data-src="images/gallery/urban style/urban_02.webp">
+            <img src="images/gallery/urban style/urban_02.webp" alt="Feroge Metropolitan Atmosphere" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Urban Style</span><p class="gal-card-title">Metropolitan Atmosphere</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+          <div class="gal-card" data-category="urban" data-src="images/gallery/urban style/urban_03.webp">
+            <img src="images/gallery/urban style/urban_03.webp" alt="Feroge Architectural Backdrop" loading="lazy" decoding="async">
+            <div class="gal-card-overlay"><span class="gal-card-tag">Urban Style</span><p class="gal-card-title">Architectural Backdrop</p></div>
+            <div class="gal-card-expand"><span>Click to View</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          </div>
+
+        </div><!-- /gal-masonry -->
+      </div><!-- /gal-grid-wrap -->
+    </div><!-- /gal-content -->
+  </div><!-- /gal-hero -->
   <!-- Ultra-Luxury Burgundy Magazine Footer (Inspired by Reference Design) -->
   <footer class="site-footer-v2" id="footer">
     <div class="container">
@@ -339,15 +1245,372 @@
     </div>
   </footer>
 
-  <!-- Lightbox Modal Viewer -->
-  <div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox">&times;</button>
-    <img src="" alt="Full Resolution Model Shot" id="lightbox-img">
+  <!-- Ultra-Luxury Minimal Editorial Image Slider Modal -->
+  <div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo Lookbook Slider">
+    <!-- Top Bar -->
+    <div class="lb-topbar">
+      <div class="lb-brand-tag">
+        <span class="lb-brand-dot"></span>
+        <span>FEROGE &bull; LOOKBOOK</span>
+      </div>
+      <div class="lb-top-actions">
+        <span class="lb-photo-counter" id="lb-counter">01 / 23</span>
+        <button class="lb-close-btn" id="lightbox-close" aria-label="Close Viewer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Center Stage with Slide Canvas & Floating Nav -->
+    <div class="lb-stage-wrapper">
+      <button class="lb-arrow lb-prev-btn" id="lb-prev" aria-label="Previous Photo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <div class="lb-stage" id="lb-stage">
+        <div class="lb-slide-container" id="lb-slide-container">
+          <img src="" alt="Feroge Model Portfolio" id="lightbox-img" class="lb-main-img">
+        </div>
+        <div class="lb-caption">
+          <span class="lb-category-tag" id="lb-tag">Formal Outlook</span>
+          <h3 class="lb-photo-title" id="lb-title">Tailored Formal Suit</h3>
+        </div>
+      </div>
+
+      <button class="lb-arrow lb-next-btn" id="lb-next" aria-label="Next Photo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- Bottom Interactive Thumbnail Filmstrip (Browse all images) -->
+    <div class="lb-filmstrip-wrap">
+      <div class="lb-filmstrip" id="lb-filmstrip"></div>
+    </div>
   </div>
 
-  <!-- GSAP & ScrollTrigger Animation Libraries -->
+  <!-- GSAP & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
+
+  <!-- Gallery Page JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const catBtns = document.querySelectorAll('.gal-cat-btn');
+      const cards = Array.from(document.querySelectorAll('.gal-card'));
+      const activeLabel = document.getElementById('gal-active-label');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const categoryNames = {
+        all: 'All Works', formal: 'Formal Outlook', monochrome: 'Monochrome',
+        sport: 'Sport Wear', street: 'Street Wear', tshirt: 'T-Shirt Look',
+        traditional: 'Traditional Wear', urban: 'Urban Style'
+      };
+
+      let visibleCards = [...cards];
+      let currentIdx = 0;
+
+      // ── Ultra-Luxury Lightbox & Filmstrip Elements ──
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const lbTag = document.getElementById('lb-tag');
+      const lbTitle = document.getElementById('lb-title');
+      const lbCounter = document.getElementById('lb-counter');
+      const lbPrev = document.getElementById('lb-prev');
+      const lbNext = document.getElementById('lb-next');
+      const lbFilmstrip = document.getElementById('lb-filmstrip');
+
+      function buildFilmstrip() {
+        if (!lbFilmstrip) return;
+        lbFilmstrip.innerHTML = '';
+        visibleCards.forEach((card, idx) => {
+          const thumb = document.createElement('div');
+          thumb.className = `lb-thumb ${idx === currentIdx ? 'active' : ''}`;
+          thumb.dataset.idx = idx;
+          const img = document.createElement('img');
+          img.src = card.dataset.src;
+          img.alt = card.querySelector('.gal-card-title')?.textContent || `Photo ${idx + 1}`;
+          img.loading = 'lazy';
+          thumb.appendChild(img);
+          thumb.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const targetIdx = parseInt(thumb.dataset.idx, 10);
+            updateLightbox(targetIdx, targetIdx > currentIdx ? 1 : -1);
+          });
+          lbFilmstrip.appendChild(thumb);
+        });
+      }
+
+      function updateLightbox(idx, direction = 0) {
+        if (!visibleCards.length) return;
+        currentIdx = (idx + visibleCards.length) % visibleCards.length;
+        const targetCard = visibleCards[currentIdx];
+        
+        const src = targetCard.dataset.src;
+        const tag = targetCard.querySelector('.gal-card-tag')?.textContent || '';
+        const title = targetCard.querySelector('.gal-card-title')?.textContent || '';
+
+        if (lbTag) lbTag.textContent = tag;
+        if (lbTitle) lbTitle.textContent = title;
+        if (lbCounter) {
+          const paddedCurrent = String(currentIdx + 1).padStart(2, '0');
+          const paddedTotal = String(visibleCards.length).padStart(2, '0');
+          lbCounter.textContent = `${paddedCurrent} / ${paddedTotal}`;
+        }
+
+        // Highlight & scroll active filmstrip thumbnail
+        if (lbFilmstrip) {
+          const thumbs = lbFilmstrip.querySelectorAll('.lb-thumb');
+          thumbs.forEach((t, i) => {
+            t.classList.toggle('active', i === currentIdx);
+          });
+          const activeThumb = lbFilmstrip.querySelector(`.lb-thumb[data-idx="${currentIdx}"]`);
+          if (activeThumb) {
+            activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+
+        // Preload next and prev images for zero delay
+        const nextIdx = (currentIdx + 1) % visibleCards.length;
+        const prevIdx = (currentIdx - 1 + visibleCards.length) % visibleCards.length;
+        if (visibleCards[nextIdx]) new Image().src = visibleCards[nextIdx].dataset.src;
+        if (visibleCards[prevIdx]) new Image().src = visibleCards[prevIdx].dataset.src;
+
+        if (lightboxImg) {
+          if (typeof gsap !== 'undefined' && !prefersReducedMotion && direction !== 0) {
+            const shiftX = direction > 0 ? -28 : 28;
+            gsap.killTweensOf(lightboxImg);
+
+            gsap.to(lightboxImg, {
+              opacity: 0,
+              x: shiftX,
+              scale: 0.96,
+              duration: 0.14,
+              ease: 'power2.in',
+              onComplete: () => {
+                lightboxImg.src = src;
+                gsap.fromTo(lightboxImg,
+                  { opacity: 0, x: -shiftX, scale: 0.96 },
+                  { opacity: 1, x: 0, scale: 1, duration: 0.3, ease: 'power3.out' }
+                );
+              }
+            });
+
+            if (lbCaption) {
+              gsap.killTweensOf(lbCaption);
+              gsap.fromTo(lbCaption,
+                { opacity: 0.3, y: 5 },
+                { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' }
+              );
+            }
+          } else {
+            lightboxImg.src = src;
+            lightboxImg.style.opacity = '1';
+            lightboxImg.style.transform = 'none';
+          }
+        }
+      }
+
+      function openLightbox(card) {
+        const idx = visibleCards.indexOf(card);
+        currentIdx = idx >= 0 ? idx : 0;
+        buildFilmstrip();
+        updateLightbox(currentIdx, 0);
+
+        lightbox.style.display = 'flex';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+          gsap.fromTo(lightbox, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+          gsap.fromTo('.lb-main-img',
+            { opacity: 0, scale: 0.88, y: 25 },
+            { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'power4.out', delay: 0.05 }
+          );
+          gsap.fromTo('.lb-topbar',
+            { opacity: 0, y: -15 },
+            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.1 }
+          );
+          gsap.fromTo('.lb-filmstrip-wrap',
+            { opacity: 0, y: 15 },
+            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.15 }
+          );
+        }
+      }
+
+      function closeLightbox() {
+        if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+          gsap.to('.lb-main-img', { scale: 0.9, opacity: 0, duration: 0.22, ease: 'power2.in' });
+          gsap.to(lightbox, {
+            opacity: 0,
+            duration: 0.25,
+            ease: 'power2.in',
+            onComplete: () => {
+              lightbox.classList.remove('active');
+              lightbox.style.display = 'none';
+              document.body.style.overflow = '';
+              if (lightboxImg) {
+                lightboxImg.style.transform = 'none';
+                lightboxImg.style.opacity = '1';
+              }
+            }
+          });
+        } else {
+          lightbox.classList.remove('active');
+          lightbox.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      }
+
+      function filterGallery(filter, clickedBtn) {
+        catBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+
+        // Auto-scroll active filter pill into view on mobile
+        if (clickedBtn && window.innerWidth <= 768) {
+          clickedBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        visibleCards = [];
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          if (match) visibleCards.push(card);
+
+          if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+            if (match) {
+              card.style.display = 'block';
+              gsap.fromTo(card,
+                { opacity: 0, y: 20, scale: 0.95 },
+                { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: 'power3.out', delay: Math.random() * 0.1 }
+              );
+            } else {
+              gsap.to(card, {
+                opacity: 0,
+                y: 10,
+                scale: 0.95,
+                duration: 0.2,
+                ease: 'power2.in',
+                onComplete: () => { card.style.display = 'none'; }
+              });
+            }
+          } else {
+            card.style.display = match ? 'block' : 'none';
+            card.style.opacity = match ? '1' : '0';
+          }
+        });
+
+        if (activeLabel) activeLabel.textContent = categoryNames[filter] || 'All Works';
+
+        // Rebuild filmstrip if lightbox is open
+        if (lightbox && lightbox.classList.contains('active')) {
+          currentIdx = 0;
+          buildFilmstrip();
+          updateLightbox(0, 0);
+        }
+      }
+
+      catBtns.forEach(btn => btn.addEventListener('click', () => filterGallery(btn.dataset.filter, btn)));
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          if (card.style.display === 'none') return;
+          if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+            gsap.to(card, {
+              scale: 0.97,
+              duration: 0.08,
+              yoyo: true,
+              repeat: 1,
+              ease: 'power2.inOut',
+              onComplete: () => openLightbox(card)
+            });
+          } else {
+            openLightbox(card);
+          }
+        });
+      });
+
+      if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+      if (lbPrev) lbPrev.addEventListener('click', () => updateLightbox(currentIdx - 1, -1));
+      if (lbNext) lbNext.addEventListener('click', () => updateLightbox(currentIdx + 1, 1));
+      
+      if (lightbox) {
+        lightbox.addEventListener('click', e => {
+          if (e.target === lightbox || e.target.classList.contains('lb-stage-wrapper')) {
+            closeLightbox();
+          }
+        });
+      }
+
+      // Keyboard Controls
+      document.addEventListener('keydown', e => {
+        if (!lightbox || !lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') updateLightbox(currentIdx - 1, -1);
+        if (e.key === 'ArrowRight') updateLightbox(currentIdx + 1, 1);
+      });
+
+      // Interactive Touch & Pointer Live-Drag Tracking
+      let isDraggingImg = false;
+      let dragStartX = 0;
+      let currentDragDiff = 0;
+
+      const slideContainer = document.querySelector('.lb-slide-container');
+
+      if (slideContainer) {
+        slideContainer.addEventListener('pointerdown', (e) => {
+          if (e.target.closest('.lb-arrow') || e.target.closest('.lb-close-btn')) return;
+          isDraggingImg = true;
+          dragStartX = e.clientX;
+          currentDragDiff = 0;
+        });
+
+        window.addEventListener('pointermove', (e) => {
+          if (!isDraggingImg || !lightboxImg) return;
+          currentDragDiff = e.clientX - dragStartX;
+          const resistance = 0.7;
+          const liveX = currentDragDiff * resistance;
+          const liveRot = currentDragDiff * 0.015;
+          const liveOpacity = Math.max(0.4, 1 - Math.abs(currentDragDiff) / 600);
+          
+          gsap.set(lightboxImg, {
+            x: liveX,
+            rotation: liveRot,
+            opacity: liveOpacity
+          });
+        });
+
+        window.addEventListener('pointerup', () => {
+          if (!isDraggingImg || !lightboxImg) return;
+          isDraggingImg = false;
+
+          if (Math.abs(currentDragDiff) > 55) {
+            if (currentDragDiff < 0) {
+              updateLightbox(currentIdx + 1, 1); // Drag left -> next
+            } else {
+              updateLightbox(currentIdx - 1, -1); // Drag right -> prev
+            }
+          } else {
+            // Spring back to center
+            gsap.to(lightboxImg, {
+              x: 0,
+              rotation: 0,
+              opacity: 1,
+              duration: 0.35,
+              ease: 'power3.out'
+            });
+          }
+          currentDragDiff = 0;
+        });
+      }
+
+      // Initial page entry animations
+      if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+        gsap.from('.gal-panel', { x: -35, opacity: 0, duration: 0.8, ease: 'power3.out' });
+        gsap.from('.wm-photo', { y: -25, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.15 });
+        gsap.from('.wm-gallery', { y: -20, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.25 });
+        gsap.from('.gal-card', { opacity: 0, y: 25, scale: 0.96, stagger: 0.035, duration: 0.5, ease: 'power3.out', delay: 0.2 });
+      }
+    });
+  </script>
 </body>
 </html>
