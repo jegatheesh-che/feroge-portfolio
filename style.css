@@ -3330,10 +3330,11 @@ button {
   background: #000000;
   position: relative;
   overflow: hidden;
-  padding: 2.5rem;
+  padding: 3rem 2.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  min-height: 580px;
 }
 
 .slide1-left-box::after {
@@ -3343,38 +3344,9 @@ button {
   left: 0;
   width: 100%;
   height: 55%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 45%, transparent 100%);
   z-index: 2;
   pointer-events: none;
-}
-
-.slide-num-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.2rem;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #ffffff;
-  position: relative;
-  z-index: 5;
-}
-
-.num-circle {
-  width: 38px;
-  height: 38px;
-  border-radius: 50% !important;
-  border: 1.5px solid #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-}
-
-.badge-line {
-  width: 40px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.4);
 }
 
 .slide1-model-img {
@@ -3384,8 +3356,9 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.88;
-  filter: contrast(1.1);
+  object-position: center top;
+  opacity: 0.92;
+  filter: contrast(1.08);
   z-index: 1;
 }
 
@@ -3829,9 +3802,19 @@ button {
 @media (max-width: 950px) {
   .poster-grid-slide1 {
     grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .slide1-left-box {
+    min-height: 520px;
+    height: 520px;
+    padding: 2.2rem 1.8rem;
+  }
+  .slide1-model-img {
+    object-position: center 15%;
   }
   .poster-grid-slide2 {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
   .slide2-mid-logos {
     padding: 2.2rem 1.8rem;
@@ -3861,6 +3844,14 @@ button {
 }
 
 @media (max-width: 640px) {
+  .slide1-left-box {
+    min-height: 480px;
+    height: 480px;
+    padding: 1.8rem 1.2rem;
+  }
+  .slide1-model-img {
+    object-position: center 10%;
+  }
   .slide2-mid-logos {
     padding: 2rem 1.2rem;
   }
