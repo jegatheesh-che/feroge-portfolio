@@ -280,54 +280,48 @@
               <span class="slide2-cat-tag">FEATURE FILMOGRAPHY</span>
             </div>
 
-            <!-- Center Content: Auto-Sliding 2-Movie Showcase (Changes every 1.5s smoothly) -->
+            <!-- Center Content: Two Movie Cards (Madharaasi first, The Dorm second with 2-poster auto-slider) -->
             <div class="slide2-cinema-body">
-              <div class="cinema-slider-wrap" id="about-cinema-slider">
-                <div class="cinema-slider-stage">
-                  
-                  <!-- Slide 1: Madharaasi (Links directly to Instagram post) -->
-                  <a href="https://www.instagram.com/p/DOV86NKifrw/?stkn=MXBweGl1b3gxdWVibA==" target="_blank" rel="noopener noreferrer" class="cinema-movie-card cinema-slide-item active" data-slide-index="0">
-                    <div class="cinema-poster-frame">
-                      <img src="images/madarasi.webp" alt="Madharaasi (2024) - Feature Film Poster" class="cinema-poster-img" loading="lazy">
-                      <span class="cinema-tag-chip">2024</span>
-                    </div>
-                    <div class="cinema-movie-details">
-                      <div class="movie-meta-row">
-                        <span class="movie-year">TAMIL FEATURE FILM</span>
-                        <span class="movie-slide-badge">POSTER 01 / 02</span>
-                      </div>
-                      <h3 class="movie-title">Madharaasi</h3>
-                      <p class="movie-role">Heroine's Friend Character</p>
-                    </div>
-                  </a>
+              <div class="cinema-posters-grid">
+                
+                <!-- Movie Card 1: Madharaasi (Links directly to Instagram post) -->
+                <a href="https://www.instagram.com/p/DOV86NKifrw/?stkn=MXBweGl1b3gxdWVibA==" target="_blank" rel="noopener noreferrer" class="cinema-movie-card cinema-link-card">
+                  <div class="cinema-poster-frame">
+                    <img src="images/madarasi.webp" alt="Madharaasi (2024) - Feature Film Poster" class="cinema-poster-img" loading="lazy">
+                    <span class="cinema-tag-chip">2024</span>
+                  </div>
+                  <div class="cinema-movie-details">
+                    <span class="movie-year">TAMIL FEATURE FILM</span>
+                    <h3 class="movie-title">Madharaasi</h3>
+                    <p class="movie-role">Heroine's Friend Character</p>
+                  </div>
+                </a>
 
-                  <!-- Slide 2: The Dorm -->
-                  <div class="cinema-movie-card cinema-slide-item" data-src="images/dorm 2.webp" data-slide-index="1">
-                    <div class="cinema-poster-frame">
-                      <img src="images/dorm 2.webp" alt="The Dorm (2025) - Mystery Thriller Poster" class="cinema-poster-img" loading="lazy">
-                      <span class="cinema-tag-chip">2025</span>
-                    </div>
-                    <div class="cinema-movie-details">
-                      <div class="movie-meta-row">
-                        <span class="movie-year">MYSTERY THRILLER</span>
-                        <span class="movie-slide-badge">POSTER 02 / 02</span>
-                      </div>
-                      <h3 class="movie-title">The Dorm</h3>
-                      <p class="movie-role">Featured Performance</p>
+                <!-- Movie Card 2: The Dorm (Smooth 1.5s Auto-Slider between Poster 1 & Poster 2) -->
+                <div class="cinema-movie-card dorm-slider-card" data-src="images/dorm.webp" id="dorm-movie-card">
+                  <div class="cinema-poster-frame dorm-poster-frame">
+                    <img src="images/dorm.webp" alt="The Dorm (2025) - Poster 1" class="cinema-poster-img dorm-slide-img active" data-img-src="images/dorm.webp" loading="lazy">
+                    <img src="images/dorm 2.webp" alt="The Dorm (2025) - Poster 2" class="cinema-poster-img dorm-slide-img" data-img-src="images/dorm 2.webp" loading="lazy">
+                    <span class="cinema-tag-chip">2025</span>
+
+                    <!-- Professional Click to View Pill -->
+                    <span class="cinema-view-pill">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                      Click to View
+                    </span>
+
+                    <div class="dorm-mini-dots">
+                      <span class="dorm-dot active" data-idx="0"></span>
+                      <span class="dorm-dot" data-idx="1"></span>
                     </div>
                   </div>
-
-                </div>
-
-                <!-- Subtle Slide Indicators -->
-                <div class="cinema-slider-indicators">
-                  <div class="cinema-dot-pill active" data-target="0">
-                    <span class="dot-progress-fill"></span>
-                  </div>
-                  <div class="cinema-dot-pill" data-target="1">
-                    <span class="dot-progress-fill"></span>
+                  <div class="cinema-movie-details">
+                    <span class="movie-year">MYSTERY THRILLER</span>
+                    <h3 class="movie-title">The Dorm</h3>
+                    <p class="movie-role">Featured Performance</p>
                   </div>
                 </div>
+
               </div>
             </div>
 

@@ -1128,54 +1128,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 14. About Page Cinema 2-Image Auto-Slider (Cycles smoothly every 1.5s)
-  const cinemaSlider = document.getElementById('about-cinema-slider');
-  if (cinemaSlider) {
-    const slides = cinemaSlider.querySelectorAll('.cinema-slide-item');
-    const dots = cinemaSlider.querySelectorAll('.cinema-dot-pill');
-    let currentSlide = 0;
-    let autoSlideTimer = null;
+  // 14. About Page "The Dorm" Card 2-Image Auto-Slider (Cycles between poster 1 & 2 every 1.5s)
+  const dormCard = document.getElementById('dorm-movie-card');
+  if (dormCard) {
+    const dormImgs = dormCard.querySelectorAll('.dorm-slide-img');
+    const dormDots = dormCard.querySelectorAll('.dorm-dot');
+    let currentDormIdx = 0;
+    let dormSlideTimer = null;
 
-    function switchCinemaSlide(index) {
-      if (!slides.length) return;
-      currentSlide = (index + slides.length) % slides.length;
-      
-      slides.forEach((slide, idx) => {
-        const isActive = idx === currentSlide;
-        slide.classList.toggle('active', isActive);
+    function switchDormImage(idx) {
+      if (!dormImgs.length) return;
+      currentDormIdx = (idx + dormImgs.length) % dormImgs.length;
+
+      dormImgs.forEach((img, i) => {
+        const isActive = i === currentDormIdx;
+        img.classList.toggle('active', isActive);
+        if (isActive) {
+          dormCard.setAttribute('data-src', img.getAttribute('data-img-src') || img.src);
+        }
       });
 
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === currentSlide);
+      dormDots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentDormIdx);
       });
     }
 
-    function startCinemaAutoSlide() {
-      if (autoSlideTimer) clearInterval(autoSlideTimer);
-      autoSlideTimer = setInterval(() => {
-        switchCinemaSlide(currentSlide + 1);
-      }, 1500); // exactly 1.5 seconds smooth transition
+    function startDormTimer() {
+      if (dormSlideTimer) clearInterval(dormSlideTimer);
+      dormSlideTimer = setInterval(() => {
+        switchDormImage(currentDormIdx + 1);
+      }, 1500); // 1.5 seconds smooth transition
     }
 
-    function stopCinemaAutoSlide() {
-      if (autoSlideTimer) {
-        clearInterval(autoSlideTimer);
-        autoSlideTimer = null;
+    function stopDormTimer() {
+      if (dormSlideTimer) {
+        clearInterval(dormSlideTimer);
+        dormSlideTimer = null;
       }
     }
 
-    dots.forEach((dot, idx) => {
+    dormDots.forEach((dot, i) => {
       dot.addEventListener('click', (e) => {
         e.stopPropagation();
-        switchCinemaSlide(idx);
-        startCinemaAutoSlide();
+        switchDormImage(i);
+        startDormTimer();
       });
     });
 
-    cinemaSlider.addEventListener('mouseenter', stopCinemaAutoSlide);
-    cinemaSlider.addEventListener('mouseleave', startCinemaAutoSlide);
+    // Click on Dorm Card opens high-resolution lightbox with both posters
+    dormCard.addEventListener('click', (e) => {
+      if (e.target.closest('.dorm-dot')) return;
+      e.stopPropagation();
+      const dormLightboxItems = [
+        { src: 'images/dorm.webp', title: 'The Dorm (2025) • Feature Film Poster 01' },
+        { src: 'images/dorm 2.webp', title: 'The Dorm (2025) • Feature Film Poster 02' }
+      ];
+      openUniversalLightbox(dormLightboxItems, currentDormIdx, 'FEROGE • THE DORM (2025)');
+    });
 
-    startCinemaAutoSlide();
+    dormCard.addEventListener('mouseenter', stopDormTimer);
+    dormCard.addEventListener('mouseleave', startDormTimer);
+
+    startDormTimer();
   }
 });
 
