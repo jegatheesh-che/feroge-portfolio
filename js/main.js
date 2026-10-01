@@ -3,6 +3,85 @@
  * Main Interactive Features
  */
 
+// 0. Ultra-Luxury Preloader Controller (Runs immediately across all pages)
+(function initSitePreloader() {
+  const preloader = document.getElementById('site-preloader');
+  const progressBar = document.getElementById('preloader-progress-bar');
+  const counter = document.getElementById('preloader-counter');
+  const statusText = document.querySelector('.preloader-status-text');
+
+  if (!preloader) return;
+
+  let progress = 0;
+  let isLoaded = false;
+
+  const interval = setInterval(() => {
+    if (!isLoaded) {
+      if (progress < 85) {
+        progress += Math.floor(Math.random() * 8) + 4;
+        if (progress > 85) progress = 85;
+      }
+    } else {
+      progress += 10;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+      }
+    }
+
+    if (progressBar) progressBar.style.width = `${progress}%`;
+    if (counter) counter.textContent = `${progress}%`;
+
+    if (progress === 100) {
+      if (statusText) statusText.textContent = 'EXPERIENCE READY';
+      setTimeout(dismissPreloader, 220);
+    }
+  }, 35);
+
+  function dismissPreloader() {
+    if (!preloader || preloader.classList.contains('loaded')) return;
+    
+    if (typeof gsap !== 'undefined') {
+      gsap.to('.preloader-inner', {
+        opacity: 0,
+        y: -25,
+        duration: 0.4,
+        ease: 'power2.in'
+      });
+      gsap.to(preloader, {
+        yPercent: -100,
+        duration: 0.75,
+        ease: 'power4.inOut',
+        delay: 0.1,
+        onComplete: () => {
+          preloader.classList.add('loaded');
+          preloader.style.display = 'none';
+          document.body.classList.add('page-revealed');
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+          }
+        }
+      });
+    } else {
+      preloader.classList.add('loaded');
+      setTimeout(() => {
+        preloader.style.display = 'none';
+        document.body.classList.add('page-revealed');
+      }, 700);
+    }
+  }
+
+  // Trigger when all window assets (images, fonts, stylesheets) finish loading
+  window.addEventListener('load', () => {
+    isLoaded = true;
+  });
+
+  // Safety fallback: maximum 2.0s wait
+  setTimeout(() => {
+    isLoaded = true;
+  }, 2000);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Smooth Navigation Highlighting & Fixed Header Scrolled State
   const siteHeader = document.getElementById('header');
@@ -1047,6 +1126,56 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCoverflow(0, false);
       }, 100);
     });
+  }
+
+  // 14. About Page Cinema 2-Image Auto-Slider (Cycles smoothly every 1.5s)
+  const cinemaSlider = document.getElementById('about-cinema-slider');
+  if (cinemaSlider) {
+    const slides = cinemaSlider.querySelectorAll('.cinema-slide-item');
+    const dots = cinemaSlider.querySelectorAll('.cinema-dot-pill');
+    let currentSlide = 0;
+    let autoSlideTimer = null;
+
+    function switchCinemaSlide(index) {
+      if (!slides.length) return;
+      currentSlide = (index + slides.length) % slides.length;
+      
+      slides.forEach((slide, idx) => {
+        const isActive = idx === currentSlide;
+        slide.classList.toggle('active', isActive);
+      });
+
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlide);
+      });
+    }
+
+    function startCinemaAutoSlide() {
+      if (autoSlideTimer) clearInterval(autoSlideTimer);
+      autoSlideTimer = setInterval(() => {
+        switchCinemaSlide(currentSlide + 1);
+      }, 1500); // exactly 1.5 seconds smooth transition
+    }
+
+    function stopCinemaAutoSlide() {
+      if (autoSlideTimer) {
+        clearInterval(autoSlideTimer);
+        autoSlideTimer = null;
+      }
+    }
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        switchCinemaSlide(idx);
+        startCinemaAutoSlide();
+      });
+    });
+
+    cinemaSlider.addEventListener('mouseenter', stopCinemaAutoSlide);
+    cinemaSlider.addEventListener('mouseleave', startCinemaAutoSlide);
+
+    startCinemaAutoSlide();
   }
 });
 
