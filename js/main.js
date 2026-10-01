@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startSlideShow() {
     if (slideInterval) clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, 2000);
+    slideInterval = setInterval(nextSlide, 4500);
   }
 
   if (heroSlides.length > 0) {
@@ -129,18 +129,165 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Moodboard Interactions & Universal "Click to View" Lightbox System
+  // ─────────────────────────────────────────────────────────────
+  // 4. Universal Ultra-Luxury Editorial Lightbox System
+  // ─────────────────────────────────────────────────────────────
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.getElementById('lightbox-close');
-  const mbExpandBtn = document.getElementById('mb-expand-btn');
-  const mbShuffleBtn = document.getElementById('mb-shuffle-btn');
+  const lbCaption = document.querySelector('.lb-caption');
+  const lbTitle = document.getElementById('lb-title');
+  const lbBrandTitle = document.getElementById('lb-brand-title');
+  const lbCounter = document.getElementById('lb-counter');
+  const lbPrev = document.getElementById('lb-prev');
+  const lbNext = document.getElementById('lb-next');
+  const lbFilmstrip = document.getElementById('lb-filmstrip');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function openLightbox(src) {
-    if (src && lightbox && lightboxImg) {
-      lightboxImg.src = src;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
+  let activeCollection = [];
+  let currentIdx = 0;
+
+  function buildUniversalFilmstrip() {
+    if (!lbFilmstrip) return;
+    lbFilmstrip.innerHTML = '';
+    activeCollection.forEach((item, idx) => {
+      const thumb = document.createElement('div');
+      thumb.className = `lb-thumb ${idx === currentIdx ? 'active' : ''}`;
+      thumb.dataset.idx = idx;
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = item.title || `Photo ${idx + 1}`;
+      img.loading = 'lazy';
+      thumb.appendChild(img);
+      thumb.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetIdx = parseInt(thumb.dataset.idx, 10);
+        updateUniversalLightbox(targetIdx, targetIdx > currentIdx ? 1 : -1);
+      });
+      lbFilmstrip.appendChild(thumb);
+    });
+  }
+
+  function updateUniversalLightbox(idx, direction = 0) {
+    if (!activeCollection.length) return;
+    currentIdx = (idx + activeCollection.length) % activeCollection.length;
+    const item = activeCollection[currentIdx];
+    
+    const src = item.src;
+    const title = item.title || '';
+
+    if (lbTitle) lbTitle.textContent = title;
+    if (lbCounter) {
+      const paddedCurrent = String(currentIdx + 1).padStart(2, '0');
+      const paddedTotal = String(activeCollection.length).padStart(2, '0');
+      lbCounter.textContent = `${paddedCurrent} / ${paddedTotal}`;
+    }
+
+    if (lbFilmstrip) {
+      const thumbs = lbFilmstrip.querySelectorAll('.lb-thumb');
+      thumbs.forEach((t, i) => {
+        t.classList.toggle('active', i === currentIdx);
+      });
+      const activeThumb = lbFilmstrip.querySelector(`.lb-thumb[data-idx="${currentIdx}"]`);
+      if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    // Preload neighbors
+    const nextIdx = (currentIdx + 1) % activeCollection.length;
+    const prevIdx = (currentIdx - 1 + activeCollection.length) % activeCollection.length;
+    if (activeCollection[nextIdx]) new Image().src = activeCollection[nextIdx].src;
+    if (activeCollection[prevIdx]) new Image().src = activeCollection[prevIdx].src;
+
+    if (lightboxImg) {
+      if (typeof gsap !== 'undefined' && !prefersReducedMotion && direction !== 0) {
+        const shiftX = direction > 0 ? -28 : 28;
+        gsap.killTweensOf(lightboxImg);
+
+        gsap.to(lightboxImg, {
+          opacity: 0,
+          x: shiftX,
+          scale: 0.96,
+          duration: 0.14,
+          ease: 'power2.in',
+          onComplete: () => {
+            lightboxImg.src = src;
+            gsap.fromTo(lightboxImg,
+              { opacity: 0, x: -shiftX, scale: 0.96 },
+              { opacity: 1, x: 0, scale: 1, duration: 0.3, ease: 'power3.out' }
+            );
+          }
+        });
+
+        if (lbCaption) {
+          gsap.killTweensOf(lbCaption);
+          gsap.fromTo(lbCaption,
+            { opacity: 0.3, y: 5 },
+            { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' }
+          );
+        }
+      } else {
+        lightboxImg.src = src;
+        lightboxImg.style.opacity = '1';
+        lightboxImg.style.transform = 'none';
+      }
+    }
+  }
+
+  function openUniversalLightbox(items, startIndex = 0, collectionTitle = 'FEROGE • LOOKBOOK') {
+    if (!lightbox || !items || !items.length) return;
+    activeCollection = items;
+    currentIdx = (startIndex + items.length) % items.length;
+
+    if (lbBrandTitle) lbBrandTitle.textContent = collectionTitle;
+
+    buildUniversalFilmstrip();
+    updateUniversalLightbox(currentIdx, 0);
+
+    lightbox.style.display = 'flex';
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+      gsap.fromTo(lightbox, { opacity: 0 }, { opacity: 1, duration: 0.32, ease: 'power2.out' });
+      gsap.fromTo('.lb-main-img, #lightbox-img',
+        { opacity: 0, scale: 0.9, y: 20 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'power4.out', delay: 0.05 }
+      );
+      gsap.fromTo('.lb-topbar',
+        { opacity: 0, y: -15 },
+        { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.1 }
+      );
+      gsap.fromTo('.lb-filmstrip-wrap',
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.12 }
+      );
+    }
+  }
+
+  function closeUniversalLightbox() {
+    if (!lightbox) return;
+    if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+      gsap.to('.lb-main-img, #lightbox-img', { scale: 0.9, opacity: 0, duration: 0.22, ease: 'power2.in' });
+      gsap.to(lightbox, {
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power2.in',
+        onComplete: () => {
+          lightbox.classList.remove('active');
+          lightbox.style.display = 'none';
+          document.body.style.overflow = '';
+          if (lightboxImg) {
+            lightboxImg.style.transform = 'none';
+            lightboxImg.style.opacity = '1';
+          }
+        }
+      });
+    } else {
+      lightbox.classList.remove('active');
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
     }
   }
 
@@ -155,7 +302,11 @@ document.addEventListener('DOMContentLoaded', () => {
     '.subgrid-card',
     '.magazine-photo-window',
     '.teaser-image-wrap',
-    '.gallery-card-item'
+    '.gallery-card-item',
+    '.slide1-left-box',
+    '.mid-logo-card',
+    '.cinema-movie-card',
+    '.grid-item'
   ];
 
   const clickableItems = document.querySelectorAll(photoSelectors.join(', '));
@@ -168,12 +319,12 @@ document.addEventListener('DOMContentLoaded', () => {
       item.style.cursor = 'pointer';
       if (!item.dataset.src) item.dataset.src = src;
 
-      // Inject sleek "Click to View" badge if absent
-      if (!item.querySelector('.click-to-view-hint') && !item.querySelector('.photo-caption-overlay')) {
+      // Inject sleek "Click to View" badge if absent (skip small logo and cinema cards)
+      if (!item.classList.contains('mid-logo-card') && !item.classList.contains('cinema-movie-card') && !item.querySelector('.click-to-view-hint') && !item.querySelector('.photo-caption-overlay') && !item.querySelector('.panoramic-view-pill')) {
         const hint = document.createElement('div');
         hint.className = 'click-to-view-hint';
         hint.innerHTML = `
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             <line x1="11" y1="8" x2="11" y2="14"></line>
@@ -184,147 +335,50 @@ document.addEventListener('DOMContentLoaded', () => {
         item.appendChild(hint);
       }
 
-      item.addEventListener('click', () => {
-        openLightbox(item.dataset.src);
+      item.addEventListener('click', (e) => {
+        // Collect siblings for mini slideshow if in a group
+        const groupParent = item.closest('.editorial-grid, .mid-logos-grid, .home-teaser-grid, .poster-grid-slide1, .slide2-cinema-body');
+        let groupItems = [];
+        let itemIndex = 0;
+
+        if (groupParent) {
+          const groupEls = Array.from(groupParent.querySelectorAll(photoSelectors.join(', ')));
+          groupItems = groupEls.map((el, i) => {
+            const gImg = el.querySelector('img');
+            const gSrc = el.dataset.src || (gImg ? gImg.getAttribute('src') : '');
+            const gAlt = (gImg ? gImg.getAttribute('alt') : '') || `Photo ${i + 1}`;
+            return { src: gSrc, title: gAlt };
+          }).filter(x => x.src);
+          itemIndex = groupEls.indexOf(item);
+        }
+
+        if (groupItems.length > 0) {
+          openUniversalLightbox(groupItems, itemIndex >= 0 ? itemIndex : 0, 'FEROGE • PORTFOLIO');
+        } else {
+          const alt = (img ? img.getAttribute('alt') : '') || 'Editorial Portrait';
+          openUniversalLightbox([{ src: item.dataset.src, title: alt }], 0, 'FEROGE • PORTFOLIO');
+        }
       });
     }
   });
 
-  // Category Filtering Logic with GSAP Animations
-  const filterBtns = document.querySelectorAll('.filter-pill-btn');
-  const galleryItems = document.querySelectorAll('.gallery-card-item');
-
-  if (filterBtns.length > 0 && galleryItems.length > 0) {
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Update active tab style
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const selectedCategory = btn.dataset.filter;
-
-        galleryItems.forEach(item => {
-          const itemCategory = item.dataset.category;
-          const isMatch = selectedCategory === 'all' || itemCategory === selectedCategory;
-
-          if (typeof gsap !== 'undefined') {
-            if (isMatch) {
-              item.style.display = 'block';
-              gsap.fromTo(item, 
-                { opacity: 0, scale: 0.92, y: 15 }, 
-                { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'power2.out', clearProps: 'transform' }
-              );
-            } else {
-              gsap.to(item, {
-                opacity: 0,
-                scale: 0.92,
-                y: 15,
-                duration: 0.3,
-                ease: 'power2.in',
-                onComplete: () => {
-                  item.style.display = 'none';
-                }
-              });
-            }
-          } else {
-            item.style.display = isMatch ? 'block' : 'none';
-          }
-        });
-      });
-    });
-  }
-
-
-  if (mbExpandBtn) {
-    mbExpandBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const heroPhoto = document.querySelector('.item-hero-photo');
-      const src = heroPhoto ? heroPhoto.dataset.src : 'images/feroge_34.webp';
-      openLightbox(src);
-    });
-  }
-
-  // Curated look sets for shuffling editorial looks
-  const editorialSets = [
-    {
-      hero: 'images/feroge_79.webp',
-      wide: 'images/feroge_19.webp',
-      tall: 'images/feroge_76.webp',
-      bottomLeft: 'images/feroge_18.webp',
-      bottomCenter: 'images/feroge_78.webp'
-    },
-    {
-      hero: 'images/feroge_21.webp',
-      wide: 'images/feroge_19.webp',
-      tall: 'images/feroge_10.webp',
-      bottomLeft: 'images/feroge_73.webp',
-      bottomCenter: 'images/feroge_2.webp'
-    },
-    {
-      hero: 'images/feroge_73.webp',
-      wide: 'images/feroge_19.webp',
-      tall: 'images/feroge_21.webp',
-      bottomLeft: 'images/feroge_12.webp',
-      bottomCenter: 'images/feroge_76.webp'
-    }
-  ];
-
-  let currentSetIndex = 0;
-
-  if (mbShuffleBtn) {
-    mbShuffleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentSetIndex = (currentSetIndex + 1) % editorialSets.length;
-      const set = editorialSets[currentSetIndex];
-
-      const heroEl = document.querySelector('.item-hero-photo');
-      const wideEl = document.querySelector('.item-wide-photo');
-      const tallEl = document.querySelector('.item-tall-photo');
-      const bLeftEl = document.querySelector('.item-bottom-left');
-      const bCenterEl = document.querySelector('.item-bottom-center');
-
-      function updatePhoto(el, newSrc) {
-        if (!el) return;
-        const img = el.querySelector('img');
-        if (img) {
-          img.style.opacity = '0';
-          setTimeout(() => {
-            img.src = newSrc;
-            el.dataset.src = newSrc;
-            img.style.opacity = '1';
-          }, 200);
-        }
-      }
-
-      updatePhoto(heroEl, set.hero);
-      updatePhoto(wideEl, set.wide);
-      updatePhoto(tallEl, set.tall);
-      updatePhoto(bLeftEl, set.bottomLeft);
-      updatePhoto(bCenterEl, set.bottomCenter);
-    });
-  }
-
-  if (lightboxClose) {
-    lightboxClose.addEventListener('click', () => {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    });
-  }
+  if (lightboxClose) lightboxClose.addEventListener('click', closeUniversalLightbox);
+  if (lbPrev) lbPrev.addEventListener('click', () => updateUniversalLightbox(currentIdx - 1, -1));
+  if (lbNext) lbNext.addEventListener('click', () => updateUniversalLightbox(currentIdx + 1, 1));
 
   if (lightbox) {
     lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto';
+      if (e.target === lightbox || e.target.classList.contains('lb-stage-wrapper') || e.target.classList.contains('lb-stage')) {
+        closeUniversalLightbox();
       }
     });
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
+    if (!lightbox || !lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeUniversalLightbox();
+    if (e.key === 'ArrowLeft') updateUniversalLightbox(currentIdx - 1, -1);
+    if (e.key === 'ArrowRight') updateUniversalLightbox(currentIdx + 1, 1);
   });
 
   // 5. Arc Cards dynamic tilt micro-interaction
@@ -908,12 +962,19 @@ document.addEventListener('DOMContentLoaded', () => {
       rafId = requestAnimationFrame(rafDragLoop);
     }
 
-    // Card click: side card brings to center, center card opens gallery
+    const coverflowStills = cfCards.map((card, idx) => {
+      const img = card.querySelector('img');
+      const src = card.dataset.src || (img ? img.getAttribute('src') : '');
+      const alt = (img ? img.getAttribute('alt') : '') || `Lookbook Still ${idx + 1}`;
+      return { src, title: alt };
+    });
+
+    // Card click: side card brings to center, center card opens full high-res Lightbox viewer
     cfCards.forEach((card, i) => {
       card.addEventListener('click', () => {
         if (hasDragThreshold) return;
         if (i === activeIndex) {
-          window.location.href = 'gallery.html';
+          openUniversalLightbox(coverflowStills, i, 'FEROGE • CINEMA & LOOKBOOK');
         } else {
           updateCoverflow(i);
         }
