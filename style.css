@@ -3600,19 +3600,19 @@ button {
 .mid-logos-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 12px;
 }
 
 .mid-logo-card {
   background: #ffffff;
-  border-radius: 8px;
-  height: 54px;
+  border-radius: 10px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 10px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  padding: 8px 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   position: relative;
@@ -3627,11 +3627,11 @@ button {
   background: #ffffff;
   border-color: #ffffff;
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
 }
 
 .mid-logo-img {
-  max-height: 38px;
+  max-height: 44px;
   max-width: 90%;
   width: auto;
   height: auto;
@@ -3830,8 +3830,16 @@ button {
   }
   .mid-logos-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .mid-logo-card {
+    height: 66px;
+    padding: 8px 14px;
+    border-radius: 10px;
+  }
+  .mid-logo-img {
+    max-height: 44px;
   }
   .slide1-right-box,
   .slide2-left-specs,
@@ -3842,19 +3850,20 @@ button {
 
 @media (max-width: 640px) {
   .slide2-mid-logos {
-    padding: 1.8rem 1rem;
+    padding: 2rem 1.2rem;
   }
   .mid-logos-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
   .mid-logo-card {
-    height: 48px;
-    padding: 4px 8px;
-    border-radius: 6px;
+    height: 64px;
+    padding: 8px 12px;
+    border-radius: 10px;
   }
   .mid-logo-img {
-    max-height: 32px;
+    max-height: 44px;
+    max-width: 88%;
   }
   .cinema-posters-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -3871,13 +3880,20 @@ button {
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 360px) {
+  .slide2-mid-logos {
+    padding: 1.5rem 0.8rem;
+  }
   .mid-logos-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 10px;
   }
   .mid-logo-card {
-    height: 46px;
+    height: 58px;
+    padding: 6px 10px;
+  }
+  .mid-logo-img {
+    max-height: 38px;
   }
   .cinema-posters-grid {
     grid-template-columns: 1fr;
