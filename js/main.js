@@ -336,6 +336,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       item.addEventListener('click', (e) => {
+        // If it's a link card to an external URL, let it open normally
+        if (item.tagName === 'A' && item.getAttribute('href') && !item.getAttribute('href').startsWith('#')) {
+          return;
+        }
+
         // Collect siblings for mini slideshow if in a group
         const groupParent = item.closest('.editorial-grid, .mid-logos-grid, .home-teaser-grid, .poster-grid-slide1, .slide2-cinema-body');
         let groupItems = [];

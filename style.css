@@ -3671,13 +3671,16 @@ button {
   gap: 14px;
 }
 
-.cinema-movie-card {
+.cinema-movie-card,
+a.cinema-movie-card {
   display: flex;
   flex-direction: column;
   background: rgba(0, 0, 0, 0.38);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 12px;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
