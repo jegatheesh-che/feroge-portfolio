@@ -3650,20 +3650,21 @@ button {
   100% { transform: translateX(calc(-100% - 12px)); }
 }
 
-/* Minimal Luxury Logo Card with Optical Alignment */
+/* Minimal Luxury Square Logo Card with 100% Solid White Background */
 .mid-logo-card {
-  background: #fafaf8;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
-  height: 62px;
-  width: 136px;
-  min-width: 136px;
+  height: 82px;
+  width: 82px;
+  min-width: 82px;
+  min-height: 82px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   position: relative;
   cursor: pointer;
@@ -3677,24 +3678,23 @@ button {
 .mid-logo-card:hover {
   background: #ffffff;
   border-color: var(--color-burgundy, #6D001A);
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 20px rgba(109, 0, 26, 0.12);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 24px rgba(109, 0, 26, 0.15);
 }
 
 .mid-logo-img {
-  max-height: 42px;
-  max-width: 108px;
+  max-height: 72%;
+  max-width: 85%;
   width: auto;
   height: auto;
   object-fit: contain;
-  opacity: 0.95;
-  filter: none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 1 !important;
+  filter: none !important;
+  transition: transform 0.3s ease;
 }
 
 .mid-logo-card:hover .mid-logo-img {
-  transform: scale(1.06);
-  opacity: 1;
+  transform: scale(1.08);
 }
 
 /* Right Burgundy Canvas Box (#6D001A) */
@@ -4046,14 +4046,15 @@ a.cinema-movie-card {
     padding: 1.5rem 0.8rem;
   }
   .mid-logo-card {
-    height: 56px;
-    width: 120px;
-    min-width: 120px;
-    padding: 6px 10px;
+    height: 70px;
+    width: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    padding: 8px;
   }
   .mid-logo-img {
-    max-height: 36px;
-    max-width: 96px;
+    max-height: 75%;
+    max-width: 85%;
   }
   .cinema-posters-grid {
     grid-template-columns: 1fr;
