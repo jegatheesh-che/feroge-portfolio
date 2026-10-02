@@ -3547,61 +3547,127 @@ button {
 }
 
 /* Middle Brand Logos Column */
+/* ==========================================================================
+   Slide 2: Minimalist Premium White Canvas Marquee (Option 4)
+   ========================================================================== */
 .slide2-mid-logos {
-  background: #0d0d0d;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 2.2rem 1.4rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
 }
 
 .mid-logos-header {
   text-align: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.6rem;
+  position: relative;
+  z-index: 2;
 }
 
 .mid-logos-tag {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono, 'Space Grotesk', monospace);
+  font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.18em;
-  color: #ffffff;
+  letter-spacing: 0.16em;
+  color: #0c0c0c;
   text-transform: uppercase;
+}
+
+.tag-dot-burgundy {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-burgundy, #6D001A);
+  display: inline-block;
+  box-shadow: 0 0 6px rgba(109, 0, 26, 0.5);
 }
 
 .mid-logos-sub {
   display: block;
-  font-size: 0.62rem;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.64rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.12em;
+  color: #666666;
   text-transform: uppercase;
   margin-top: 4px;
 }
 
-.mid-logos-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.logo-marquee-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
+.logo-marquee-stream {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  width: 100%;
+}
+
+.logo-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+.track-stream-ltr .logo-marquee-track {
+  animation: logoScrollLTR 26s linear infinite;
+}
+
+.track-stream-rtl .logo-marquee-track {
+  animation: logoScrollRTL 24s linear infinite;
+}
+
+.logo-marquee-stream:hover .logo-marquee-track,
+.logo-marquee-stream:active .logo-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes logoScrollLTR {
+  0% { transform: translateX(calc(-100% - 12px)); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes logoScrollRTL {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(calc(-100% - 12px)); }
+}
+
+/* Minimal Luxury Logo Card with Optical Alignment */
 .mid-logo-card {
-  background: #ffffff;
-  border-radius: 10px;
-  height: 64px;
+  background: #fafaf8;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  height: 62px;
+  width: 136px;
+  min-width: 136px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 14px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.38);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .mid-logo-card .click-to-view-hint {
@@ -3610,24 +3676,25 @@ button {
 
 .mid-logo-card:hover {
   background: #ffffff;
-  border-color: #ffffff;
+  border-color: var(--color-burgundy, #6D001A);
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 8px 20px rgba(109, 0, 26, 0.12);
 }
 
 .mid-logo-img {
-  max-height: 44px;
-  max-width: 90%;
+  max-height: 42px;
+  max-width: 108px;
   width: auto;
   height: auto;
   object-fit: contain;
-  opacity: 1;
+  opacity: 0.95;
   filter: none;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .mid-logo-card:hover .mid-logo-img {
   transform: scale(1.06);
+  opacity: 1;
 }
 
 /* Right Burgundy Canvas Box (#6D001A) */
@@ -3915,24 +3982,11 @@ a.cinema-movie-card {
     min-height: auto;
   }
   .slide2-mid-logos {
-    padding: 2.2rem 1.8rem;
+    padding: 2.2rem 1.4rem;
     border-left: none;
     border-right: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  .mid-logos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  .mid-logo-card {
-    height: 66px;
-    padding: 8px 14px;
-    border-radius: 10px;
-  }
-  .mid-logo-img {
-    max-height: 44px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
   .slide1-right-box,
   .slide2-left-specs,
@@ -3954,20 +4008,7 @@ a.cinema-movie-card {
     object-position: center 10%;
   }
   .slide2-mid-logos {
-    padding: 2rem 1.2rem;
-  }
-  .mid-logos-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-  .mid-logo-card {
-    height: 62px;
-    padding: 8px 12px;
-    border-radius: 10px;
-  }
-  .mid-logo-img {
-    max-height: 40px;
-    max-width: 88%;
+    padding: 1.8rem 1rem;
   }
   .slide1-right-box,
   .slide2-left-specs,
@@ -4002,18 +4043,17 @@ a.cinema-movie-card {
 
 @media (max-width: 400px) {
   .slide2-mid-logos {
-    padding: 1.6rem 0.9rem;
-  }
-  .mid-logos-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    padding: 1.5rem 0.8rem;
   }
   .mid-logo-card {
     height: 56px;
-    padding: 6px 8px;
+    width: 120px;
+    min-width: 120px;
+    padding: 6px 10px;
   }
   .mid-logo-img {
     max-height: 36px;
+    max-width: 96px;
   }
   .cinema-posters-grid {
     grid-template-columns: 1fr;
