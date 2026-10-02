@@ -3654,16 +3654,16 @@ button {
 .mid-logo-card {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
-  height: 82px;
-  width: 82px;
-  min-width: 82px;
-  min-height: 82px;
+  border-radius: 10px;
+  height: 88px;
+  width: 88px;
+  min-width: 88px;
+  min-height: 88px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   position: relative;
@@ -3679,12 +3679,12 @@ button {
   background: #ffffff;
   border-color: var(--color-burgundy, #6D001A);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 10px 24px rgba(109, 0, 26, 0.15);
+  box-shadow: 0 10px 24px rgba(109, 0, 26, 0.16);
 }
 
 .mid-logo-img {
-  max-height: 72%;
-  max-width: 85%;
+  max-height: 80%;
+  max-width: 88%;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -3693,8 +3693,54 @@ button {
   transition: transform 0.3s ease;
 }
 
+/* Optical Balances for wide horizontal wordmarks to fill the square box prominently */
+.mid-logo-card[data-src*="logo8"] .mid-logo-img,
+.mid-logo-card[data-src*="logo13"] .mid-logo-img {
+  max-width: 96%;
+  max-height: 90%;
+  transform: scale(1.22);
+}
+
+.mid-logo-card[data-src*="logo9"] .mid-logo-img,
+.mid-logo-card[data-src*="logo12"] .mid-logo-img,
+.mid-logo-card[data-src*="logo14"] .mid-logo-img {
+  max-width: 94%;
+  max-height: 88%;
+  transform: scale(1.15);
+}
+
+.mid-logo-card[data-src*="logo3"] .mid-logo-img,
+.mid-logo-card[data-src*="logo4"] .mid-logo-img,
+.mid-logo-card[data-src*="logo6"] .mid-logo-img,
+.mid-logo-card[data-src*="logo2"] .mid-logo-img {
+  max-width: 92%;
+  max-height: 85%;
+  transform: scale(1.08);
+}
+
+/* Optical Balances for solid square badge logos so they don't overpower */
+.mid-logo-card[data-src*="logo7"] .mid-logo-img,
+.mid-logo-card[data-src*="logo11"] .mid-logo-img,
+.mid-logo-card[data-src*="logo15"] .mid-logo-img,
+.mid-logo-card[data-src*="tvc_logo_1"] .mid-logo-img {
+  max-width: 62%;
+  max-height: 62%;
+  border-radius: 4px;
+}
+
 .mid-logo-card:hover .mid-logo-img {
   transform: scale(1.08);
+}
+
+.mid-logo-card[data-src*="logo8"]:hover .mid-logo-img,
+.mid-logo-card[data-src*="logo13"]:hover .mid-logo-img {
+  transform: scale(1.28);
+}
+
+.mid-logo-card[data-src*="logo9"]:hover .mid-logo-img,
+.mid-logo-card[data-src*="logo12"]:hover .mid-logo-img,
+.mid-logo-card[data-src*="logo14"]:hover .mid-logo-img {
+  transform: scale(1.22);
 }
 
 /* Right Burgundy Canvas Box (#6D001A) */
