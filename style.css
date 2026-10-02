@@ -4760,6 +4760,10 @@ html, body {
   gap: 16px;
   flex-shrink: 0;
   will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Left to Right Movement (Brand Works) - Medium Balanced Velocity */
@@ -4780,19 +4784,19 @@ html, body {
 
 @keyframes scrollLTR {
   0% {
-    transform: translateX(calc(-100% - 16px));
+    transform: translate3d(calc(-100% - 16px), 0, 0);
   }
   100% {
-    transform: translateX(0%);
+    transform: translate3d(0%, 0, 0);
   }
 }
 
 @keyframes scrollRTL {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0%, 0, 0);
   }
   100% {
-    transform: translateX(calc(-100% - 16px));
+    transform: translate3d(calc(-100% - 16px), 0, 0);
   }
 }
 
@@ -4813,6 +4817,10 @@ html, body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
   user-select: none;
   -webkit-user-select: none;

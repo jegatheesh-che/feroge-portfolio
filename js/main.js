@@ -74,15 +74,22 @@
     }
   }
 
-  // Trigger when all window assets finish loading
-  window.addEventListener('load', () => {
-    isLoaded = true;
-  });
+  // Trigger immediately once DOM is interactive / ready without blocking on dozens of images
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(() => { isLoaded = true; }, 80);
+  } else {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => { isLoaded = true; }, 100);
+    });
+    window.addEventListener('load', () => {
+      isLoaded = true;
+    });
+  }
 
-  // Safety fallback: maximum 1.5s wait
+  // Safety fallback: maximum 600ms wait
   setTimeout(() => {
     isLoaded = true;
-  }, 1500);
+  }, 600);
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
