@@ -3,7 +3,7 @@
  * Main Interactive Features
  */
 
-// 0. Ultra-Luxury Preloader Controller (Runs immediately across all pages)
+// 0. Minimalist Luxury Preloader Controller (Runs immediately across all pages)
 (function initSitePreloader() {
   const preloader = document.getElementById('site-preloader');
   const progressBar = document.getElementById('preloader-progress-bar');
@@ -15,14 +15,16 @@
   let progress = 0;
   let isLoaded = false;
 
+  const padNum = (num) => (num < 10 ? `0${num}` : `${num}`);
+
   const interval = setInterval(() => {
     if (!isLoaded) {
-      if (progress < 85) {
+      if (progress < 88) {
         progress += Math.floor(Math.random() * 8) + 4;
-        if (progress > 85) progress = 85;
+        if (progress > 88) progress = 88;
       }
     } else {
-      progress += 10;
+      progress += 12;
       if (progress >= 100) {
         progress = 100;
         clearInterval(interval);
@@ -30,29 +32,19 @@
     }
 
     if (progressBar) progressBar.style.width = `${progress}%`;
-    if (counter) counter.textContent = `${progress}%`;
+    if (counter) counter.textContent = padNum(progress);
 
     if (progress === 100) {
-      if (statusText) statusText.textContent = 'EXPERIENCE READY';
-      setTimeout(dismissPreloader, 220);
+      if (statusText) statusText.textContent = 'READY';
+      setTimeout(dismissPreloader, 180);
     }
-  }, 35);
+  }, 28);
 
   function dismissPreloader() {
     if (!preloader || preloader.classList.contains('loaded')) return;
     
     if (typeof gsap !== 'undefined') {
-      gsap.to('.preloader-inner', {
-        opacity: 0,
-        y: -25,
-        duration: 0.4,
-        ease: 'power2.in'
-      });
-      gsap.to(preloader, {
-        yPercent: -100,
-        duration: 0.75,
-        ease: 'power4.inOut',
-        delay: 0.1,
+      gsap.timeline({
         onComplete: () => {
           preloader.classList.add('loaded');
           preloader.style.display = 'none';
@@ -61,25 +53,36 @@
             ScrollTrigger.refresh();
           }
         }
-      });
+      })
+      .to('.preloader-minimal-core, .preloader-corner', {
+        opacity: 0,
+        y: -15,
+        duration: 0.4,
+        ease: 'power2.in'
+      })
+      .to(preloader, {
+        yPercent: -100,
+        duration: 0.75,
+        ease: 'power4.inOut'
+      }, '-=0.1');
     } else {
       preloader.classList.add('loaded');
       setTimeout(() => {
         preloader.style.display = 'none';
         document.body.classList.add('page-revealed');
-      }, 700);
+      }, 600);
     }
   }
 
-  // Trigger when all window assets (images, fonts, stylesheets) finish loading
+  // Trigger when all window assets finish loading
   window.addEventListener('load', () => {
     isLoaded = true;
   });
 
-  // Safety fallback: maximum 2.0s wait
+  // Safety fallback: maximum 1.5s wait
   setTimeout(() => {
     isLoaded = true;
-  }, 2000);
+  }, 1500);
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
