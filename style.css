@@ -3272,7 +3272,7 @@ button {
 /* Subtle Minimal Sub-Footer Bar */
 .footer-sub-bar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -3282,10 +3282,6 @@ button {
   font-size: 0.76rem;
   color: rgba(255, 255, 255, 0.45);
   letter-spacing: 0.02em;
-}
-
-.f-copyright {
-  color: rgba(255, 255, 255, 0.45);
 }
 
 .f-credit-wrap {
