@@ -506,17 +506,17 @@ button {
   will-change: transform;
 }
 
-/* Individual Slide Focal Framing */
-.hero-slide-img.slide-img-1 { object-position: center 20%; }
-.hero-slide-img.slide-img-2 { object-position: center 20%; }
-.hero-slide-img.slide-img-3 { object-position: center 20%; }
-.hero-slide-img.slide-img-4 { object-position: center 20%; }
+/* Individual Slide Focal Framing — center 40% shows face+body on desktop without top-crop */
+.hero-slide-img.slide-img-1 { object-position: center 35%; }
+.hero-slide-img.slide-img-2 { object-position: center 30%; }
+.hero-slide-img.slide-img-3 { object-position: center 30%; }
+.hero-slide-img.slide-img-4 { object-position: center 30%; }
 
 @media (min-width: 1200px) {
-  .hero-slide-img.slide-img-1 { object-position: center 20%; }
-  .hero-slide-img.slide-img-2 { object-position: center 20%; }
-  .hero-slide-img.slide-img-3 { object-position: center 20%; }
-  .hero-slide-img.slide-img-4 { object-position: center 20%; }
+  .hero-slide-img.slide-img-1 { object-position: center 35%; }
+  .hero-slide-img.slide-img-2 { object-position: center 30%; }
+  .hero-slide-img.slide-img-3 { object-position: center 30%; }
+  .hero-slide-img.slide-img-4 { object-position: center 30%; }
 }
 
 .hero-slide:nth-child(odd).active .hero-slide-img {
@@ -1013,12 +1013,12 @@ button {
   box-shadow: 0 12px 30px rgba(184, 134, 11, 0.35);
 }
 
-.coverflow-prev { left: 20px; }
-.coverflow-next { right: 20px; }
+.coverflow-prev { left: 0px; }
+.coverflow-next { right: 0px; }
 
 @media (min-width: 1300px) {
-  .coverflow-prev { left: calc(50% - 580px); }
-  .coverflow-next { right: calc(50% - 580px); }
+  .coverflow-prev { left: -28px; }
+  .coverflow-next { right: -28px; }
 }
 
 /* Dots indicator */
@@ -3244,7 +3244,8 @@ button {
   text-align: center;
   overflow: hidden;
   margin-top: 0.5rem;
-  line-height: 0.8;
+  padding: 0.05em 0 0.12em; /* Breathing room for descenders (g, y) */
+  line-height: 1;
 }
 
 .footer-giant-brand {
@@ -3255,7 +3256,7 @@ button {
   color: #ffffff;
   letter-spacing: -0.04em;
   text-transform: none;
-  line-height: 0.82;
+  line-height: 1;
   margin: 0;
   padding: 0;
   display: block;
@@ -3500,19 +3501,20 @@ button {
 .slide2-left-specs {
   background: #000000;
   color: #ffffff;
-  padding: 3.5rem 2.5rem;
+  padding: 2.5rem 2.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow: auto;
 }
 
 .specs-grid-mini {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem 1.5rem;
+  gap: 0.75rem 1.5rem;
   margin-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: 1.5rem;
+  padding-top: 1.25rem;
 }
 
 .spec-item-mini {
@@ -3592,20 +3594,28 @@ button {
 .mid-logos-square-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  gap: 10px;
   justify-items: center;
   align-items: center;
   width: 100%;
+}
+
+/* On desktop panels (poster-grid-slide2), show 5 columns to fill wider space */
+@media (min-width: 951px) {
+  .poster-grid-slide2 .mid-logos-square-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
 }
 
 /* Minimal Luxury Logo Tiles — The logo itself is the rounded box (Edge-to-Edge) */
 .mid-logo-card {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
+  border-radius: 14px;
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 135px;
+  max-width: none; /* allow grid to set size */
   display: flex;
   align-items: center;
   justify-content: center;
