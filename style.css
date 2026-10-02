@@ -3102,7 +3102,7 @@ button {
 
 .site-footer-v2 {
   background: linear-gradient(180deg, #7c001f 0%, #6D001A 50%, #4a0011 100%);
-  padding: 100px 0 40px 0;
+  padding: 100px 0 50px 0;
   color: #ffffff;
   position: relative;
   overflow: hidden;
@@ -3242,10 +3242,10 @@ button {
 /* Bottom Giant Display Serif Logo (Matching Reference "Luisante" Typography Scale) */
 .footer-giant-brand-wrap {
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
   margin-top: 0.5rem;
-  padding: 0.05em 0 0.12em; /* Breathing room for descenders (g, y) */
-  line-height: 1;
+  padding: 0.1em 0 0.35em; /* Ample breathing room for descenders (g, y, p, q) */
+  line-height: 1.15;
 }
 
 .footer-giant-brand {
@@ -3256,10 +3256,10 @@ button {
   color: #ffffff;
   letter-spacing: -0.04em;
   text-transform: none;
-  line-height: 1;
+  line-height: 1.15;
   margin: 0;
-  padding: 0;
-  display: block;
+  padding: 0 0 0.12em 0; /* Ensures bottom loop of 'g' and descenders are never cut off */
+  display: inline-block;
   width: 100%;
   user-select: none;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
