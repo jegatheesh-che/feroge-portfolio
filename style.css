@@ -3616,13 +3616,13 @@ button {
   border-radius: 18px;
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 86px;
+  max-width: 94px;
   height: auto;
-  min-height: 68px;
+  min-height: 74px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  padding: 6px;
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.02),
     0 10px 24px -4px rgba(70, 50, 100, 0.08),
@@ -3651,8 +3651,8 @@ button {
 }
 
 .mid-logo-img {
-  max-height: 80%;
-  max-width: 88%;
+  max-height: 88%;
+  max-width: 92%;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -3668,33 +3668,33 @@ button {
 .mid-logo-card[data-src*="logo13"] .mid-logo-img,
 .mid-logo-card[data-src*="logo14"] .mid-logo-img,
 .mid-logo-card[data-src*="tvc_logo_1"] .mid-logo-img {
-  max-width: 94%;
-  max-height: 88%;
-  transform: scale(1.18);
+  max-width: 96%;
+  max-height: 90%;
+  transform: scale(1.24);
 }
 
 .mid-logo-card[data-src*="logo1"] .mid-logo-img,
 .mid-logo-card[data-src*="logo2"] .mid-logo-img,
 .mid-logo-card[data-src*="logo3"] .mid-logo-img,
 .mid-logo-card[data-src*="logo6"] .mid-logo-img,
+.mid-logo-card[data-src*="logo7"] .mid-logo-img,
 .mid-logo-card[data-src*="tvc_logo_2"] .mid-logo-img {
-  max-width: 88%;
-  max-height: 84%;
-  transform: scale(1.06);
+  max-width: 92%;
+  max-height: 88%;
+  transform: scale(1.14);
 }
 
 /* Optical Balances for square and round badges so visual area matches wordmarks */
-.mid-logo-card[data-src*="logo7"] .mid-logo-img,
 .mid-logo-card[data-src*="logo10"] .mid-logo-img,
 .mid-logo-card[data-src*="logo11"] .mid-logo-img,
 .mid-logo-card[data-src*="logo15"] .mid-logo-img {
-  max-width: 76%;
-  max-height: 76%;
-  transform: scale(0.96);
+  max-width: 86%;
+  max-height: 86%;
+  transform: scale(1.06);
 }
 
 .mid-logo-card:hover .mid-logo-img {
-  transform: scale(1.12);
+  transform: scale(1.16);
 }
 
 .mid-logo-card[data-src*="logo8"]:hover .mid-logo-img,
@@ -3703,14 +3703,22 @@ button {
 .mid-logo-card[data-src*="logo13"]:hover .mid-logo-img,
 .mid-logo-card[data-src*="logo14"]:hover .mid-logo-img,
 .mid-logo-card[data-src*="tvc_logo_1"]:hover .mid-logo-img {
-  transform: scale(1.26);
+  transform: scale(1.30);
 }
 
+.mid-logo-card[data-src*="logo1"]:hover .mid-logo-img,
+.mid-logo-card[data-src*="logo2"]:hover .mid-logo-img,
+.mid-logo-card[data-src*="logo3"]:hover .mid-logo-img,
+.mid-logo-card[data-src*="logo6"]:hover .mid-logo-img,
 .mid-logo-card[data-src*="logo7"]:hover .mid-logo-img,
+.mid-logo-card[data-src*="tvc_logo_2"]:hover .mid-logo-img {
+  transform: scale(1.20);
+}
+
 .mid-logo-card[data-src*="logo10"]:hover .mid-logo-img,
 .mid-logo-card[data-src*="logo11"]:hover .mid-logo-img,
 .mid-logo-card[data-src*="logo15"]:hover .mid-logo-img {
-  transform: scale(1.04);
+  transform: scale(1.12);
 }
 
 @media (max-width: 950px) {
