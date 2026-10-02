@@ -1126,8 +1126,8 @@ button {
   object-fit: cover;
   border-radius: 0 !important;
   display: block;
-  user-drag: none;
   -webkit-user-drag: none;
+  user-select: none;
   pointer-events: none;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1706,22 +1706,11 @@ button {
 }
 
 .lb-caption {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  margin-top: 0.85rem;
-  text-align: center;
+  display: none !important;
 }
 
 .lb-photo-title {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-style: italic;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: 0.02em;
+  display: none !important;
 }
 
 .lb-arrow {
@@ -3603,35 +3592,32 @@ button {
 .mid-logos-square-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
+  gap: 14px;
   justify-items: center;
   align-items: center;
   width: 100%;
 }
 
-/* Minimal Luxury Squircle Logo Card with Modern Diffused Ambient Shadow */
+/* Minimal Luxury Logo Tiles — The logo itself is the rounded box (Edge-to-Edge) */
 .mid-logo-card {
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 94px;
-  height: auto;
-  min-height: 74px;
+  max-width: 135px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 0;
   box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.02),
-    0 10px 24px -4px rgba(70, 50, 100, 0.08),
-    0 20px 48px -6px rgba(109, 0, 26, 0.05),
-    0 0 0 1px rgba(0, 0, 0, 0.03);
+    0 2px 6px rgba(0, 0, 0, 0.04),
+    0 8px 20px -4px rgba(0, 0, 0, 0.08);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .mid-logo-card .click-to-view-hint {
@@ -3639,86 +3625,29 @@ button {
 }
 
 .mid-logo-card:hover {
-  background: #ffffff;
-  border-color: rgba(109, 0, 26, 0.22);
-  transform: translateY(-4px) scale(1.05);
+  border-color: rgba(109, 0, 26, 0.3);
+  transform: translateY(-4px) scale(1.04);
   box-shadow: 
-    0 8px 12px -2px rgba(0, 0, 0, 0.03),
-    0 16px 36px -4px rgba(70, 50, 100, 0.12),
-    0 28px 60px -8px rgba(109, 0, 26, 0.15),
-    0 0 0 1px rgba(109, 0, 26, 0.15);
+    0 8px 24px -4px rgba(0, 0, 0, 0.16),
+    0 0 0 1px rgba(109, 0, 26, 0.2);
   z-index: 5;
 }
 
 .mid-logo-img {
-  max-height: 88%;
-  max-width: 92%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
+  object-position: center;
+  display: block;
   opacity: 1 !important;
   filter: none !important;
-  transition: transform 0.3s ease;
-}
-
-/* Optical Balances for wide horizontal wordmarks to fill the square box prominently */
-.mid-logo-card[data-src*="logo8"] .mid-logo-img,
-.mid-logo-card[data-src*="logo9"] .mid-logo-img,
-.mid-logo-card[data-src*="logo12"] .mid-logo-img,
-.mid-logo-card[data-src*="logo13"] .mid-logo-img,
-.mid-logo-card[data-src*="logo14"] .mid-logo-img,
-.mid-logo-card[data-src*="tvc_logo_1"] .mid-logo-img {
-  max-width: 96%;
-  max-height: 90%;
-  transform: scale(1.24);
-}
-
-.mid-logo-card[data-src*="logo1"] .mid-logo-img,
-.mid-logo-card[data-src*="logo2"] .mid-logo-img,
-.mid-logo-card[data-src*="logo3"] .mid-logo-img,
-.mid-logo-card[data-src*="logo6"] .mid-logo-img,
-.mid-logo-card[data-src*="logo7"] .mid-logo-img,
-.mid-logo-card[data-src*="tvc_logo_2"] .mid-logo-img {
-  max-width: 92%;
-  max-height: 88%;
-  transform: scale(1.14);
-}
-
-/* Optical Balances for square and round badges so visual area matches wordmarks */
-.mid-logo-card[data-src*="logo10"] .mid-logo-img,
-.mid-logo-card[data-src*="logo11"] .mid-logo-img,
-.mid-logo-card[data-src*="logo15"] .mid-logo-img {
-  max-width: 86%;
-  max-height: 86%;
-  transform: scale(1.06);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mid-logo-card:hover .mid-logo-img {
-  transform: scale(1.16);
-}
-
-.mid-logo-card[data-src*="logo8"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo9"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo12"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo13"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo14"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="tvc_logo_1"]:hover .mid-logo-img {
-  transform: scale(1.30);
-}
-
-.mid-logo-card[data-src*="logo1"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo2"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo3"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo6"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo7"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="tvc_logo_2"]:hover .mid-logo-img {
-  transform: scale(1.20);
-}
-
-.mid-logo-card[data-src*="logo10"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo11"]:hover .mid-logo-img,
-.mid-logo-card[data-src*="logo15"]:hover .mid-logo-img {
-  transform: scale(1.12);
+  transform: scale(1.06);
 }
 
 @media (max-width: 950px) {
@@ -3731,25 +3660,33 @@ button {
   }
   .mid-logos-square-grid {
     grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    gap: 12px;
+  }
+  .mid-logo-card {
+    max-width: 130px;
+    padding: 0;
   }
 }
 
 @media (max-width: 640px) {
   .mid-logos-square-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
   .mid-logo-card {
-    padding: 6px;
-    border-radius: 12px;
+    padding: 0;
+    border-radius: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .mid-logos-square-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 10px;
+  }
+  .mid-logo-card {
+    padding: 0;
+    border-radius: 12px;
   }
   .slide2-mid-logos {
     padding: 1.6rem 0.9rem;
@@ -4105,15 +4042,16 @@ a.cinema-movie-card {
     padding: 1.5rem 0.8rem;
   }
   .mid-logo-card {
-    height: 70px;
-    width: 70px;
-    min-width: 70px;
-    min-height: 70px;
-    padding: 8px;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 90px;
+    padding: 0;
+    border-radius: 10px;
   }
   .mid-logo-img {
-    max-height: 75%;
-    max-width: 85%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   .cinema-posters-grid {
     grid-template-columns: 1fr;
@@ -4628,7 +4566,7 @@ html, body {
     width: 100%;
     box-sizing: border-box;
   }
-
+}
 
 /* ==========================================================================
    Category Filter Nav Bar & Dynamic Gallery Cards
@@ -5308,6 +5246,7 @@ html, body {
   padding-left: 0.32em; /* optical alignment */
   background: linear-gradient(180deg, #ffffff 40%, rgba(255, 255, 255, 0.65) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
