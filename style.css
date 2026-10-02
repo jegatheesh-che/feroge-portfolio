@@ -3555,16 +3555,15 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2.2rem 1.4rem;
+  padding: 2rem 1.3rem;
   border-left: 1px solid rgba(0, 0, 0, 0.08);
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   position: relative;
-  overflow: hidden;
 }
 
 .mid-logos-header {
   text-align: center;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.25rem;
   position: relative;
   z-index: 2;
 }
@@ -3598,77 +3597,37 @@ button {
   letter-spacing: 0.12em;
   color: #666666;
   text-transform: uppercase;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
-.logo-marquee-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  overflow: hidden;
-  position: relative;
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-}
-
-.logo-marquee-stream {
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-  width: 100%;
-}
-
-.logo-marquee-track {
-  display: flex;
+.mid-logos-square-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  justify-items: center;
   align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-  will-change: transform;
-}
-
-.track-stream-ltr .logo-marquee-track {
-  animation: logoScrollLTR 26s linear infinite;
-}
-
-.track-stream-rtl .logo-marquee-track {
-  animation: logoScrollRTL 24s linear infinite;
-}
-
-.logo-marquee-stream:hover .logo-marquee-track,
-.logo-marquee-stream:active .logo-marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes logoScrollLTR {
-  0% { transform: translateX(calc(-100% - 12px)); }
-  100% { transform: translateX(0%); }
-}
-
-@keyframes logoScrollRTL {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(calc(-100% - 12px)); }
+  width: 100%;
 }
 
 /* Minimal Luxury Square Logo Card with 100% Solid White Background */
 .mid-logo-card {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 10px;
-  height: 88px;
-  width: 88px;
-  min-width: 88px;
-  min-height: 88px;
+  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 86px;
+  height: auto;
+  min-height: 68px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  flex-shrink: 0;
 }
 
 .mid-logo-card .click-to-view-hint {
@@ -3678,8 +3637,9 @@ button {
 .mid-logo-card:hover {
   background: #ffffff;
   border-color: var(--color-burgundy, #6D001A);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 10px 24px rgba(109, 0, 26, 0.16);
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 8px 22px rgba(109, 0, 26, 0.16);
+  z-index: 5;
 }
 
 .mid-logo-img {
@@ -3721,7 +3681,6 @@ button {
 /* Optical Balances for solid square badge logos so they don't overpower */
 .mid-logo-card[data-src*="logo7"] .mid-logo-img,
 .mid-logo-card[data-src*="logo11"] .mid-logo-img,
-.mid-logo-card[data-src*="logo15"] .mid-logo-img,
 .mid-logo-card[data-src*="tvc_logo_1"] .mid-logo-img {
   max-width: 62%;
   max-height: 62%;
@@ -3741,6 +3700,41 @@ button {
 .mid-logo-card[data-src*="logo12"]:hover .mid-logo-img,
 .mid-logo-card[data-src*="logo14"]:hover .mid-logo-img {
   transform: scale(1.22);
+}
+
+@media (max-width: 950px) {
+  .slide2-mid-logos {
+    padding: 2rem 1.4rem;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .mid-logos-square-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mid-logos-square-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .mid-logo-card {
+    padding: 6px;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mid-logos-square-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .slide2-mid-logos {
+    padding: 1.6rem 0.9rem;
+  }
 }
 
 /* Right Burgundy Canvas Box (#6D001A) */
