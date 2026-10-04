@@ -1190,10 +1190,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target.closest('.dorm-dot')) return;
       e.stopPropagation();
       const dormLightboxItems = [
-        { src: 'images/dorm.webp', title: 'The Dorm (2025) • Feature Film Poster 01' },
-        { src: 'images/dorm 2.webp', title: 'The Dorm (2025) • Feature Film Poster 02' }
+        { src: 'images/dorm.webp', title: 'The Dorm (2026) • Feature Film Poster 01' },
+        { src: 'images/dorm 2.webp', title: 'The Dorm (2026) • Feature Film Poster 02' }
       ];
-      openUniversalLightbox(dormLightboxItems, currentDormIdx, 'FEROGE • THE DORM (2025)');
+      openUniversalLightbox(dormLightboxItems, currentDormIdx, 'FEROGE • THE DORM (2026)');
     });
 
     dormCard.addEventListener('mouseenter', stopDormTimer);
